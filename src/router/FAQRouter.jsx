@@ -1,9 +1,8 @@
-import React from 'react';
+import FaqPage from "../page/FAQPage.jsx";
 
-function FaqRouter(props) {
-    return (
-        <div></div>
-    );
+const FaqRouter = {
+    path: "/qna",
+    element: <FaqPage />,
 }
 
 export default FaqRouter;
