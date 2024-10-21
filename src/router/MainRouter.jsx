@@ -11,11 +11,11 @@ const MainRouter = createBrowserRouter([
         element: <AdminIndex/>,
         children: [
             QNARouter,
+            CareGiverRouter,
         ]
     },
 
     FAQRouter,
-    CareGiverRouter,
     CareTakerRouter
 
 
