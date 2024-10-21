@@ -1,5 +1,4 @@
 import {createBrowserRouter} from "react-router-dom";
-import MainPage from "../page/MainPage.jsx";
 import AdminIndex from "../page/AdminIndex.jsx";
 import FAQRouter from "./FAQRouter.jsx";
 import QNARouter from "./QNARouter.jsx";
@@ -11,11 +10,11 @@ const MainRouter = createBrowserRouter([
         path: '/',
         element: <AdminIndex/>,
         children: [
-
+            QNARouter,
         ]
     },
+
     FAQRouter,
-    QNARouter,
     CareGiverRouter,
     CareTakerRouter
 
