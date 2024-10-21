@@ -1,8 +1,10 @@
-import FaqPage from "../page/FAQPage.jsx";
+import {lazy} from "react";
+
+const FAQ = lazy(() => import('../page/FAQPage'))
 
 const FaqRouter = {
-    path: "/qna",
-    element: <FaqPage />,
+    path: "/faq",
+    element: <FAQ />
 }
 
 export default FaqRouter;

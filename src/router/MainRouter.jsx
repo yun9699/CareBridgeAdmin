@@ -10,13 +10,16 @@ const MainRouter = createBrowserRouter([
         path: '/',
         element: <AdminIndex/>,
         children: [
+            QNARouter,
             FAQRouter,
         ]
     },
-        QNARouter,
-        CareGiverRouter,
-        CareTakerRouter,
 
-]);
+
+    CareGiverRouter,
+    CareTakerRouter
+
+
+    ]);
 
 export default MainRouter;
