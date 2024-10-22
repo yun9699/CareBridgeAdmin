@@ -4,8 +4,8 @@ import {Outlet} from "react-router-dom";
 function AdminIndex() {
     return (
         <BasicLayout>
-            <div>
-                <Outlet></Outlet>
+            <div className="flex-1 p-10 bg-green-50">
+                <Outlet />
             </div>
         </BasicLayout>
     );

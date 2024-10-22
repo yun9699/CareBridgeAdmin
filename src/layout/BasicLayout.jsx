@@ -1,7 +1,7 @@
 import { Home, Users, DollarSign, FileText, Settings } from 'lucide-react';
 import {useState} from "react";
 
-function BasicLayout() {
+function BasicLayout({ children }) {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -37,7 +37,11 @@ function BasicLayout() {
                         설정
                     </a>
                 </nav>
+
             </aside>
+            <div>
+                {children}
+            </div>
         </div>
     )
 
