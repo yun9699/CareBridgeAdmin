@@ -1,9 +1,10 @@
-import React from 'react';
+import {lazy} from "react";
 
-function FaqRouter(props) {
-    return (
-        <div></div>
-    );
+const FAQ = lazy(() => import('../page/FAQPage'))
+
+const FaqRouter = {
+    path: "/faq",
+    element: <FAQ />
 }
 
 export default FaqRouter;
