@@ -1,9 +1,9 @@
-import React from 'react';
+import {lazy} from "react";
 
-function QnaRouter(props) {
-    return (
-        <div></div>
-    );
+const QNA = lazy(() => import('../page/QNAPage'))
+
+const QnaRouter = {
+    path: "/qna",
+    element: <QNA/>
 }
-
 export default QnaRouter;

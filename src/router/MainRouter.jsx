@@ -27,7 +27,6 @@ const MainRouter = createBrowserRouter([
     CareGiverRouter
 
 
-
     ]);
 
 export default MainRouter;
