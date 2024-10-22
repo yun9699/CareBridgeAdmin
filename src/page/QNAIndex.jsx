@@ -1,12 +1,14 @@
+import {Outlet} from "react-router-dom";
 import BasicLayout from "../layout/BasicLayout.jsx";
 
-function MainPage() {
+function QnaIndex() {
     return (
         <div>
             <BasicLayout>
-            <div>Main Page</div>
+            <Outlet/>
             </BasicLayout>
         </div>
     );
 }
-export default MainPage;
+
+export default QnaIndex;
