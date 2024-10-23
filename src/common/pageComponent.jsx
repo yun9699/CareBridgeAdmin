@@ -1,5 +1,39 @@
 
-function PageComponent() {
+
+function PageComponent({pageResponse}) {
+
+  const makeArr = (from, to, prev, next) => {
+
+    let arr = []
+
+    if(prev){
+      arr.push(from -1)
+    }
+
+    for (let i = from; i <= to ; i++) {
+      arr.push(i)
+    }
+
+    return arr
+  }
+
+    const current = pageResponse.number + 1;
+    const tempLast = Math.ceil(current / 10.0) * 10;
+    const startPage = tempLast - 9;
+    const endPage = pageResponse.total < tempLast ? pageResponse.total : tempLast;
+
+    const pageNums = makeArr(startPage, endPage, false, false);
+
+    const lis = pageNums.map(num => (
+
+        <li
+            className='px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300'
+            key={num}
+        >
+          {num}
+        </li>
+    ));
+
     return (
         <span className="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
   <nav aria-label="Table navigation">
@@ -22,40 +56,9 @@ function PageComponent() {
           </svg>
         </button>
       </li>
-      <li>
-        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-          1
-        </button>
-      </li>
-      <li>
-        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-          2
-        </button>
-      </li>
-      <li>
-        <button
-            className="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-          3
-        </button>
-      </li>
-      <li>
-        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-          4
-        </button>
-      </li>
-      <li>
-        <span className="px-3 py-1">...</span>
-      </li>
-      <li>
-        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-          8
-        </button>
-      </li>
-      <li>
-        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-          9
-        </button>
-      </li>
+
+      {lis}
+
       <li>
         <button
             className="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
