@@ -2,7 +2,7 @@
 function QnaReadComponent() {
     return (
         <div>
-            <div>QNA ReadComponent Page</div>
+            <div>QNA Read Component</div>
         </div>
     );
 }

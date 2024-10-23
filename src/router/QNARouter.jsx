@@ -1,8 +1,8 @@
 import {lazy} from "react";
 
-const QNAIndexBase = lazy(() => import('../page/QNAIndex'))
-const QNA = lazy(() => import('../page/QNAPage'))
-const ReadPage = lazy(() => import('../page/QNAReadPage'))
+const QNAIndexBase = lazy(() => import('../page/QNA/QNAIndex.jsx'))
+const QNA = lazy(() => import('../page/QNA/QNAPage.jsx'))
+const ReadPage = lazy(() => import('../page/QNA/QNAReadPage.jsx'))
 
 const QnaRouter = {
     path: "/qna",

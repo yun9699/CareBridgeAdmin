@@ -1,17 +1,16 @@
-
 import {lazy} from "react";
 
-const CareGiver = lazy(() => import("../page/CareGiverPage"));
-const CareGiverBase = lazy(() => import('../page/CareGiverIndex.jsx'))
+const CareGiverIndex = lazy(() => import('../page/careGiver/CareGiverIndex.jsx'))
+const CareGiver = lazy(() => import('../page/careGiver/CareGiverPage'))
 
 const CareGiverRouter = {
     path: "/caregiver",
-    element: <CareGiverBase/>,
+    element: <CareGiverIndex/>,
     children: [
         {
             path: "",
             element: <CareGiver/>
-        },
+        }
     ]
 }
 

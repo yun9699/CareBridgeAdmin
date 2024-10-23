@@ -1,4 +1,4 @@
-import BasicLayout from "../layout/BasicLayout.jsx";
+import BasicLayout from "../../layout/BasicLayout.jsx";
 import {Outlet} from "react-router-dom";
 
 

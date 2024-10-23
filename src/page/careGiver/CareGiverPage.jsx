@@ -1,4 +1,4 @@
-import CareGiverComponent from "../component/caregiver/CareGiverComponent.jsx";
+import CareGiverComponent from "../../component/caregiver/CareGiverComponent.jsx";
 
 function CareGiverPage() {
     return (

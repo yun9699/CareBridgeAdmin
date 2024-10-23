@@ -1,4 +1,4 @@
-import QNAComponent from "../component/qna/QNAComponent.jsx";
+import QNAComponent from "../../component/qna/QNAComponent.jsx";
 
 function QnaPage() {
     return (
