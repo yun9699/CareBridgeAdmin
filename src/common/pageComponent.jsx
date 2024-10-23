@@ -1,44 +1,41 @@
 
+const makeArr = (from, to, prev, next) => {
 
+  let arr = []
 
-  const makeArr = (from, to, prev, next) => {
-
-
-    let arr = []
-
-    if(prev){
-      arr.push(from -1)
-    }
-
-    for (let i = from; i <= to ; i++) {
-      arr.push(i)
-    }
-
-    return arr
+  if(prev){
+    arr.push(from -1)
   }
 
-  function PageComponent({pageResponse}) {
+  for (let i = from; i <= to ; i++) {
+    arr.push(i)
+  }
 
-    const current = pageResponse.pageRequest.page + 1;
-    const tempLast = Math.ceil(current / 10.0) * 10;
-    const startPage = tempLast - 9;
-    const endPage = pageResponse.total < tempLast ? pageResponse.total : tempLast;
+  return arr
+}
 
-    const pageNums = makeArr(startPage, endPage, false, false);
+function PageComponent({pageResponse}) {
 
-    const lis = pageNums.map(num => (
+  const current = pageResponse.pageRequest.page + 1;
+  const tempLast = Math.ceil(current / 10.0) * 10;
+  const startPage = tempLast - 9;
+  const endPage = pageResponse.total < tempLast ? pageResponse.total : tempLast;
 
-        <li
-            className='px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300'
-            key={num}
-        >
-          {num}
-        </li>
-    ));
+  const pageNums = makeArr(startPage, endPage, false, false);
 
-    return (
-        <span className="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-  <nav aria-label="Table navigation">
+  const lis = pageNums.map(num => (
+
+      <li
+          className='px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300'
+          key={num}
+      >
+        {num}
+      </li>
+  ));
+
+  return (
+      <span className="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+    <nav aria-label="Table navigation">
     <ul className="inline-flex items-center">
       <li>
         <button
@@ -60,6 +57,7 @@
       </li>
 
       {lis}
+
       <li>
         <button
             className="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
@@ -82,6 +80,6 @@
   </nav>
 </span>
     );
+}
 
-  }
 export default PageComponent;
