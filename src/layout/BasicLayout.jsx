@@ -2,19 +2,17 @@ import { useState } from "react";
 
 function BasicLayout({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [isPagesMenuOpen, setIsPagesMenuOpen] = useState(false)
-
-
+    const [isPagesMenuOpen, setIsPagesMenuOpen] = useState(false);
 
     return (
         <div className="flex h-screen bg-green-50">
             {/* 사이드바 */}
             <aside
-                className={`z-20 ${sidebarOpen ? 'block' : 'hidden'} w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0`}
+                className={`z-20 ${sidebarOpen ? 'block' : 'hidden'} w-64 overflow-y-auto bg-white md:block flex-shrink-0`}
             >
-                <div className="py-4 text-gray-500 dark:text-gray-400">
+                <div className="py-4 text-gray-500">
                     <a
-                        className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
+                        className="ml-6 text-lg font-bold text-gray-800"
                         href="#"
                     >
                         Windmill
@@ -22,11 +20,11 @@ function BasicLayout({ children }) {
                     <ul className="mt-6">
                         <li className="relative px-6 py-3">
                             <span
-                                className="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                                className="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
                                 aria-hidden="true"
                             ></span>
                             <a
-                                className="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                                className="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-green-600"
                                 href="index.html"
                             >
                                 <svg
@@ -48,7 +46,7 @@ function BasicLayout({ children }) {
                         </li>
                         <li className="relative px-6 py-3">
                             <a
-                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-green-600"
                                 href="forms.html"
                             >
                                 <svg
@@ -70,7 +68,7 @@ function BasicLayout({ children }) {
                         </li>
                         <li className="relative px-6 py-3">
                             <a
-                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-green-600"
                                 href="cards.html"
                             >
                                 <svg
@@ -92,7 +90,7 @@ function BasicLayout({ children }) {
                         </li>
                         <li className="relative px-6 py-3">
                             <a
-                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-green-600"
                                 href="charts.html"
                             >
                                 <svg
@@ -115,7 +113,7 @@ function BasicLayout({ children }) {
                         </li>
                         <li className="relative px-6 py-3">
                             <a
-                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-green-600"
                                 href="buttons.html"
                             >
                                 <svg
@@ -137,7 +135,7 @@ function BasicLayout({ children }) {
                         </li>
                         <li className="relative px-6 py-3">
                             <a
-                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-green-600"
                                 href="modals.html"
                             >
                                 <svg
@@ -159,7 +157,7 @@ function BasicLayout({ children }) {
                         </li>
                         <li className="relative px-6 py-3">
                             <a
-                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-green-600"
                                 href="tables.html"
                             >
                                 <svg
@@ -181,8 +179,8 @@ function BasicLayout({ children }) {
                     <ul className="mt-6">
                         <li className="relative px-6 py-3">
                             <button
-                                className="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                                onClick={() => setIsPagesMenuOpen(!isPagesMenuOpen)} // 메뉴 토글
+                                className="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-green-600"
+                                onClick={() => setIsPagesMenuOpen(!isPagesMenuOpen)}
                                 aria-haspopup="true"
                             >
                                 <span className="inline-flex items-center">
@@ -204,22 +202,22 @@ function BasicLayout({ children }) {
                             {/* 페이지 메뉴 열기/닫기 */}
                             {isPagesMenuOpen && (
                                 <ul
-                                    className="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                                    className="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50"
                                     aria-label="submenu"
                                 >
-                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-green-600">
                                         <a className="w-full" href="/pages/login">Login</a>
                                     </li>
-                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-green-600">
                                         <a className="w-full" href="/pages/create-account">Create account</a>
                                     </li>
-                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-green-600">
                                         <a className="w-full" href="/pages/forgot-password">Forgot password</a>
                                     </li>
-                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-green-600">
                                         <a className="w-full" href="/pages/404">404</a>
                                     </li>
-                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-green-600">
                                         <a className="w-full" href="/pages/blank">Blank</a>
                                     </li>
                                 </ul>
@@ -228,7 +226,7 @@ function BasicLayout({ children }) {
                     </ul>
                     <div className="px-6 my-6">
                         <button
-                            className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                            className="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green"
                         >
                             Create account
                             <span className="ml-2" aria-hidden="true">+</span>
