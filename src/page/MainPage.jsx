@@ -1,12 +1,15 @@
 import BasicLayout from "../layout/BasicLayout.jsx";
+import {Outlet} from "react-router-dom";
+import MainComponent from "../component/MainComponent.jsx";
 
 function MainPage() {
     return (
-        <div>
-            <BasicLayout>
-            <div>Main Page</div>
-            </BasicLayout>
-        </div>
+        <BasicLayout>
+            <div>
+                <MainComponent/>
+                <Outlet />
+            </div>
+        </BasicLayout>
     );
 }
 export default MainPage;

@@ -1,14 +1,16 @@
 import BasicLayout from "../layout/BasicLayout.jsx";
 import {Outlet} from "react-router-dom";
 
-function AdminIndex() {
+
+function CareTakerIndexPage() {
     return (
         <BasicLayout>
-            <div className="flex-1 p-10 bg-green-50">
-                <Outlet />
-            </div>
+
+            <div>CareTaker Index Page</div>
+            <Outlet/>
+
         </BasicLayout>
     );
 }
 
-export default AdminIndex;
+export default CareTakerIndexPage;
