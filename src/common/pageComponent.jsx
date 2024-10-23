@@ -1,8 +1,8 @@
 
 
-function PageComponent({pageResponse}) {
 
   const makeArr = (from, to, prev, next) => {
+
 
     let arr = []
 
@@ -17,7 +17,9 @@ function PageComponent({pageResponse}) {
     return arr
   }
 
-    const current = pageResponse.number + 1;
+  function PageComponent({pageResponse}) {
+
+    const current = pageResponse.pageRequest.page + 1;
     const tempLast = Math.ceil(current / 10.0) * 10;
     const startPage = tempLast - 9;
     const endPage = pageResponse.total < tempLast ? pageResponse.total : tempLast;
@@ -58,7 +60,6 @@ function PageComponent({pageResponse}) {
       </li>
 
       {lis}
-
       <li>
         <button
             className="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
@@ -81,6 +82,6 @@ function PageComponent({pageResponse}) {
   </nav>
 </span>
     );
-}
 
+  }
 export default PageComponent;
