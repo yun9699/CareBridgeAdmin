@@ -1,14 +1,19 @@
 import {lazy} from "react";
 
 
-const CareTaker = lazy(() => import("../page/CareTakerPage.jsx"))
-
+const CareTakerIndex = lazy(() => import("../page/CareTakerIndexPage.jsx"))
+const CareTakerList = lazy(() => import("../page/CareTakerPage.jsx"))
 
 const CareTakerRouter = {
 
     path: '/careTaker',
-    element: <CareTaker/>,
+    element: <CareTakerIndex/>,
     children: [
+
+        {
+            path: "list",
+            element: <CareTakerList/>
+        }
 
     ]
 
