@@ -1,4 +1,4 @@
-import FAQComponent from "../component/faq/FAQComponent.jsx";
+import FAQComponent from "../../component/faq/FAQComponent.jsx";
 
 function FaqPage() {
     return (
