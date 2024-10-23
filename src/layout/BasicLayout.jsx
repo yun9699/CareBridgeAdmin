@@ -2,10 +2,9 @@ import { useState } from "react";
 
 function BasicLayout({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isPagesMenuOpen, setIsPagesMenuOpen] = useState(false)
 
-    const toggleSidebar = () => {
-        setSidebarOpen(!sidebarOpen);
-    };
+
 
     return (
         <div className="flex h-screen bg-green-50">
@@ -177,6 +176,54 @@ function BasicLayout({ children }) {
                                 </svg>
                                 <span className="ml-4">Tables</span>
                             </a>
+                        </li>
+                    </ul>
+                    <ul className="mt-6">
+                        <li className="relative px-6 py-3">
+                            <button
+                                className="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                                onClick={() => setIsPagesMenuOpen(!isPagesMenuOpen)} // 메뉴 토글
+                                aria-haspopup="true"
+                            >
+                                <span className="inline-flex items-center">
+                                    <span className="ml-4">Pages</span>
+                                </span>
+                                <svg
+                                    className="w-4 h-4"
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clipRule="evenodd"
+                                    ></path>
+                                </svg>
+                            </button>
+                            {/* 페이지 메뉴 열기/닫기 */}
+                            {isPagesMenuOpen && (
+                                <ul
+                                    className="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                                    aria-label="submenu"
+                                >
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                        <a className="w-full" href="/pages/login">Login</a>
+                                    </li>
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                        <a className="w-full" href="/pages/create-account">Create account</a>
+                                    </li>
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                        <a className="w-full" href="/pages/forgot-password">Forgot password</a>
+                                    </li>
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                        <a className="w-full" href="/pages/404">404</a>
+                                    </li>
+                                    <li className="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                        <a className="w-full" href="/pages/blank">Blank</a>
+                                    </li>
+                                </ul>
+                            )}
                         </li>
                     </ul>
                     <div className="px-6 my-6">
