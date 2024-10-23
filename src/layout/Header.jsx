@@ -26,7 +26,7 @@ function Header() {
     };
 
     return (
-        <div className="flex flex-col flex-1 w-full">
+        <div className="flex flex-col w-full">
             <header className={`z-10 py-4 bg-white shadow-md ${darkMode ? 'dark:bg-gray-800' : ''}`}>
                 <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
                     {/* Mobile hamburger */}
@@ -67,11 +67,12 @@ function Header() {
                                 </svg>
                             </div>
                             <input
-                                className="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-green-300 focus:outline-none focus:shadow-outline-green"
+                                className="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-white border-0 rounded-md focus:placeholder-gray-500 focus:bg-white focus:border-green-300 focus:outline-none focus:shadow-outline-green"
                                 type="text"
                                 placeholder="Search for projects"
                                 aria-label="Search"
                             />
+
                         </div>
                     </div>
 
