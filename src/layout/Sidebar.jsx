@@ -11,11 +11,9 @@ function Sidebar(props) {
                 className={`z-20 ${sidebarOpen ? 'block' : 'hidden'} w-64 overflow-y-auto bg-white md:block flex-shrink-0`}
             >
                 <div className="py-4 text-gray-500">
-                    <a
-                        className="ml-6 text-lg font-bold text-gray-800"
-                        href="#"
-                    >
-                        Windmill
+                    <a className="ml-6 text-lg font-bold text-gray-800 flex items-center" href="#">
+                        <img src="/logo.png" alt="Logo" className="mr-2 h-8"/>
+                        CareBridge
                     </a>
                     <ul className="mt-6">
                         <li className="relative px-6 py-3">
