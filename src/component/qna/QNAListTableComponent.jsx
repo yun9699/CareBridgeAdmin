@@ -9,7 +9,8 @@ const init = {
     pageRequest: [],
     total: 0,
     startPage: 0,
-    prev: false
+    prev: false,
+    pageResponse: []
 }
 
 function QNAListTableComponent() {
@@ -87,7 +88,7 @@ function QNAListTableComponent() {
                     <tr>
                         <td colSpan="4">
                             <div className="flex justify-center items-center py-4">
-                                <PageComponent pageResponse={qna.pageRequest} />
+                                <PageComponent pageResponse={qna} />
                             </div>
                         </td>
                     </tr>
