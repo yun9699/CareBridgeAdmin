@@ -1,7 +1,7 @@
 import {lazy} from "react";
 
+const FAQIndexBase = lazy(() => import('../page/faq/FAQIndex.jsx'))
 const FAQ = lazy(() => import('../page/faq/FAQPage.jsx'))
-const FAQIndexBase = lazy(() => import('../page/faq/FAQIndexPage'))
 
 const FaqRouter = {
     path: "/faq",
