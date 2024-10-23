@@ -1,3 +1,4 @@
+import {useSearchParams} from "react-router-dom";
 
 const makeArr = (from, to, prev, next) => {
 
@@ -23,11 +24,20 @@ function PageComponent({pageResponse}) {
 
   const pageNums = makeArr(startPage, endPage, false, false);
 
+  const [query, setQuery] = useSearchParams()
+
+  const changePage = (pageNum) => {
+    query.set("page", String(pageNum));
+    setQuery(query);
+  };
+
+
   const lis = pageNums.map(num => (
 
       <li
           className='px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300'
           key={num}
+          onClick={() => changePage(num)}
       >
         {num}
       </li>
