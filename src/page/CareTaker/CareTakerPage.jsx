@@ -1,4 +1,4 @@
-import CareTakerComponent from "../component/caretaker/CareTakerComponent.jsx";
+import CareTakerComponent from "../../component/caretaker/CareTakerComponent.jsx";
 
 function CareTakerPage() {
     return (

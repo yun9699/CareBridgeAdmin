@@ -1,4 +1,4 @@
-import QNAReadComponent from "../component/qna/QNAReadComponent.jsx";
+import QNAReadComponent from "../../component/qna/QNAReadComponent.jsx";
 
 function QnaReadPage() {
     return (
