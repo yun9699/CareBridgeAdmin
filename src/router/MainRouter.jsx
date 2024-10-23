@@ -1,30 +1,29 @@
 import {createBrowserRouter} from "react-router-dom";
-import AdminIndex from "../page/AdminIndex.jsx";
 import FAQRouter from "./FAQRouter.jsx";
 import QNARouter from "./QNARouter.jsx";
 import CareGiverRouter from "./CareGiverRouter.jsx";
 import CareTakerRouter from "./CareTakerRouter.jsx";
 import {lazy} from "react";
+import MainPage from "../page/MainPage.jsx";
 
-const CareTakerDetail = lazy(() => import("../page/AdminDetailPage.jsx"))
+const AdminDetail = lazy(() => import("../page/AdminDetailPage.jsx"))
 
 const MainRouter = createBrowserRouter([
     {
         path: '/',
-        element: <AdminIndex/>,
+        element: <MainPage/>,
         children: [
-            CareTakerRouter,
-
             {
-                path: "ctDetail",
-                element: <CareTakerDetail/>,
+                path: "detail",
+                element: <AdminDetail/>,
             }
         ],
 
     },
     FAQRouter,
     QNARouter,
-    CareGiverRouter
+    CareGiverRouter,
+    CareTakerRouter
 
 
     ]);
