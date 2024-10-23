@@ -4,6 +4,7 @@ function CareGiverComponent() {
     return (
         <div>
             <div>CareGiverComponent</div>
+            <></>
         </div>
     );
 }
