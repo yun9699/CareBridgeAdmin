@@ -37,10 +37,12 @@ function BasicLayout({ children }) {
                         설정
                     </a>
                 </nav>
+
             </aside>
             <div>
                 {children}
             </div>
+
         </div>
     )
 
