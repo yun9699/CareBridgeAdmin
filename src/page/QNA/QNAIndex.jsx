@@ -1,14 +1,14 @@
 import {Outlet} from "react-router-dom";
-import BasicLayout from "../layout/BasicLayout.jsx";
+import BasicLayout from "../../layout/BasicLayout.jsx";
 
-function CareGiverIndex() {
+function QnaIndex() {
     return (
         <div>
             <BasicLayout>
-                <Outlet/>
+            <Outlet/>
             </BasicLayout>
         </div>
     );
 }
 
-export default CareGiverIndex;
+export default QnaIndex;
