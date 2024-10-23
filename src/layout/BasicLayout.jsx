@@ -38,8 +38,8 @@ function BasicLayout({ children }) {
                     </a>
                 </nav>
             </aside>
-            <div>
-                {children}
+            <div className="flex-1 p-6 md:p-10 overflow-y-auto">
+                {children} {/* Outlet or children will be rendered here */}
             </div>
         </div>
     )
