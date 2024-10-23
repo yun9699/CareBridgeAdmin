@@ -1,8 +1,15 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import {getList} from "@/api/qnaAPI.js";
 
 function QNAListTableComponent() {
     // 테이블 데이터를 상태로 관리합니다.
 
+    useEffect(() => {
+        const fetchItems = async() => {
+            const data = await getList();
+
+        }
+    })
 
     return (
         <table className="w-full whitespace-no-wrap">
