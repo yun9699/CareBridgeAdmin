@@ -1,11 +1,17 @@
-
 import {lazy} from "react";
 
-const CareGiver = lazy(() => import("../page/CareGiverPage"));
+const CareGiverIndex = lazy(() => import('../page/QNAIndex'))
+const CareGiver = lazy(() => import('../page/CareGiverPage.jsx'))
 
 const CareGiverRouter = {
-    path: "/caregiver",
-    element: <CareGiver></CareGiver>
+    path: "/qna",
+    element: <CareGiverIndex/>,
+    children: [
+        {
+            path: "",
+            element: <CareGiver/>
+        }
+    ]
 }
 
 export default CareGiverRouter;

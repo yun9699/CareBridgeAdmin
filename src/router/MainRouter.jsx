@@ -12,18 +12,14 @@ const MainRouter = createBrowserRouter([
     {
         path: '/',
         element: <MainPage/>,
-        children: [
-            {
-                path: "detail",
-                element: <AdminDetail/>,
-            }
-        ],
-
     },
     FAQRouter,
     QNARouter,
     CareGiverRouter,
     CareTakerRouter
+
+
+
 
 
     ]);
