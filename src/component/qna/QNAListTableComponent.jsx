@@ -3,7 +3,13 @@ import {getList} from "@/api/qnaAPI.js";
 import PageComponent from "@/common/pageComponent.jsx";
 
 const init = {
-    list: []
+    list: [],
+    endPage: 0,
+    next: false,
+    pageRequest: [],
+    total: 0,
+    startPage: 0,
+    prev: false
 }
 
 function QNAListTableComponent() {
@@ -81,7 +87,7 @@ function QNAListTableComponent() {
                     <tr>
                         <td colSpan="4">
                             <div className="flex justify-center items-center py-4">
-                                <PageComponent/>
+                                <PageComponent pageResponse={qna.pageRequest} />
                             </div>
                         </td>
                     </tr>
