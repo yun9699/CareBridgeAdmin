@@ -26,7 +26,7 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ tmp, func, type }) {
+function CommonTableComponent({ tmp, func, detailFn}) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -61,6 +61,7 @@ function CommonTableComponent({ tmp, func, type }) {
                 <CommonDetailComponent isOpen={detailOpen}
                                        onClose={() => setDetailOpen(false)}
                                        no={no}
+                                       detailFn={detailFn}
                 />}
 
             <table className="min-w-full leading-normal border border-gray-300 rounded-lg shadow-lg">
