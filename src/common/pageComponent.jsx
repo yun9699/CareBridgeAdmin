@@ -16,10 +16,6 @@ const makeArr = (from, to, prev, next) => {
 
 function PageComponent({pageResponse}) {
 
-  console.log("-------")
-  console.log(pageResponse);
-  const current = pageResponse.pageRequest.page + 1;
-
   const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage, false, false);
 
   const lis = pageNums.map(num => (
@@ -28,7 +24,7 @@ function PageComponent({pageResponse}) {
           key={num}
           className={`mx-1 px-4 py-2 text-sm font-semibold border rounded-md 
     ${
-              current === num
+              (pageResponse.pageRequest.page + 1) === num
                   ? 'bg-green-600 text-white border-green-600' // 활성 페이지 스타일
                   : 'bg-white text-green-500 border-green-500 hover:bg-green-600 hover:text-white' // 기본 스타일
           } 
@@ -43,6 +39,7 @@ function PageComponent({pageResponse}) {
     <nav aria-label="Table navigation">
     <ul className="inline-flex items-center">
       <li>
+
         <button
             className="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
             aria-label="Previous"
