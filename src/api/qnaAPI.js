@@ -10,6 +10,7 @@ export const getList = async (page) => {
     const pageValue = (Number)(page || 1) // 없으면 1
 
     const res = await axios.get(`${host}/list?page=${pageValue}`)
+    console.log(res.data)
 
     return res.data
 }
