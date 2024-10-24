@@ -2,7 +2,7 @@ import CommonTableComponent from "@/common/CommonTableComponent.jsx";
 import {getCareTakerList} from "@/api/caretakerAPI.js";
 
 const tmp = [
-    "ctno", "ctname", "ctage", "cthone", "ctemail", "ctphone", "ctaddress"
+    "ctno", "ctname", "ctage", "ctemail", "ctphone", "ctaddress"
 ];
 
 function CareTakerComponent() {

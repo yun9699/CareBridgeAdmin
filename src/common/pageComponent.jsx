@@ -1,3 +1,4 @@
+import {useSearchParams} from "react-router-dom";
 
 const makeArr = (from, to) => {
 
@@ -13,6 +14,7 @@ const makeArr = (from, to) => {
 function PageComponent({pageResponse, changePage}) {
 
   const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage);
+
 
   const lis = pageNums.map(num => (
 
