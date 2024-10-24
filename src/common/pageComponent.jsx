@@ -19,13 +19,6 @@ function PageComponent({pageResponse}) {
 
   const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage, false, false);
 
-  const [query, setQuery] = useSearchParams()
-
-  const changePage = (pageNum) => {
-    query.set("page", String(pageNum));
-    setQuery(query);
-  };
-
 
   const lis = pageNums.map(num => (
 
