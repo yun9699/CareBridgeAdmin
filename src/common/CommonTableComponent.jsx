@@ -13,6 +13,18 @@ const init = {
     prev: false
 }
 
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false, // 24시간 형식
+    });
+};
+
 function CommonTableComponent({ tmp, func }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -49,7 +61,9 @@ function CommonTableComponent({ tmp, func }) {
                 {data.list.map((item) => (
                     <tr key={item[tmp[0]]} className="hover:bg-gray-100 border-b border-gray-200">
                         {tmp.map((temp) => (
-                            <td key={temp} className="px-5 py-4 text-sm text-gray-600">{item[temp]}</td>
+                            <td key={temp} className="px-5 py-4 text-sm text-gray-600">
+                                {temp.endsWith('Date') ? formatDate(item[temp]) : item[temp]}
+                            </td>
                         ))}
                         <td className="px-5 py-4 text-sm">
                             <div className="flex items-center space-x-4">
