@@ -15,3 +15,4 @@ export const getQNAList = async (page) => {
     return res.data
 }
 
+

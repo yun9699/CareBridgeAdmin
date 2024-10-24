@@ -9,7 +9,7 @@ const QnaRouter = {
     element: <QNAIndexBase/>,
     children: [
         {
-            path: "",
+            path: "list",
             element: <QNA/>
         },
         {
