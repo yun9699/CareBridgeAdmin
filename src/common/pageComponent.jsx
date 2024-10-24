@@ -1,11 +1,7 @@
 
-const makeArr = (from, to, prev, next) => {
+const makeArr = (from, to) => {
 
   let arr = []
-
-  if(prev){
-    arr.push(from -1)
-  }
 
   for (let i = from; i <= to ; i++) {
     arr.push(i)
@@ -16,7 +12,7 @@ const makeArr = (from, to, prev, next) => {
 
 function PageComponent({pageResponse}) {
 
-  const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage, false, false);
+  const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage);
 
   const lis = pageNums.map(num => (
 

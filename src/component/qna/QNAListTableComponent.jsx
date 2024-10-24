@@ -9,8 +9,7 @@ const init = {
     pageRequest: [],
     total: 0,
     startPage: 0,
-    prev: false,
-    pageResponse: []
+    prev: false
 }
 
 function QNAListTableComponent() {
