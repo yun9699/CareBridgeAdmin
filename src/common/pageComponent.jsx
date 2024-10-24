@@ -43,6 +43,7 @@ function PageComponent({pageResponse, changePage}) {
             <button
                 className="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
                 aria-label="Previous"
+                onClick={() => changePage(pageResponse.startPage - 1)}
             >
               <svg
                   aria-hidden="true"
@@ -68,6 +69,7 @@ function PageComponent({pageResponse, changePage}) {
             <button
                 className="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
                 aria-label="Next"
+                onClick={() => changePage(pageResponse.endPage + 1)}
             >
               <svg
                   className="w-4 h-4 fill-current"
