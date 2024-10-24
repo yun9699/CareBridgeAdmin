@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import PageComponent from "@/common/pageComponent.jsx";
 import { useSearchParams } from "react-router-dom";
-import {deleteGiver, getCareGiverList} from "@/api/caregiverAPI.js";
+import {deleteGiver} from "@/api/caregiverAPI.js";
 import {deleteQNA} from "@/api/qnaAPI.js";
 import {deleteTaker} from "@/api/caretakerAPI.js";
-import {getCareGiverList} from "@/api/caregiverAPI.js";
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 
 const init = {
@@ -124,7 +123,8 @@ function CommonTableComponent({ tmp, func }) {
                                 </button>
                                 <button
                                     className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
-                                    aria-label="Delete">
+                                    aria-label="Delete"
+                                    onClick={() => ClikedeleteDate(item)}>
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             fillRule="evenodd"
