@@ -1,5 +1,5 @@
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
-import {getCareGiverList} from "@/api/caregiverAPI.js";
+import {getCareGiverList, getCareGiverOne} from "@/api/caregiverAPI.js";
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 
 const tmp = [
@@ -11,6 +11,7 @@ function CareGiverComponent() {
         <div>
             <CommonTableComponent tmp={tmp}
                                   func={getCareGiverList}
+                                  detailFn={getCareGiverOne}
             >
             </CommonTableComponent>
         </div>
