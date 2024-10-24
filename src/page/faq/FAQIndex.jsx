@@ -1,11 +1,26 @@
 import BasicLayout from "../../layout/BasicLayout.jsx";
-import {Outlet} from "react-router-dom";
+import React, { useState } from "react";
+import FAQListTableComponent from "../../component/faq/FAQListTableComponent.jsx"
 
 function FAQIndex() {
+    // selectedCategory : 현재 선택된 카테고리, changSelectedCategory : 카테고리 변경하기
+    const [selectedCategory, changeSelectedCategory] = useState("간병인");
+
+    // 버튼 클릭 시 카테고리 변경하기
+    const handleButtonClick = (category) => {
+        changeSelectedCategory(category);
+    };
+
     return (
         <BasicLayout>
+            <h1 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+                FAQ 관리 페이지
+            </h1>
+
+            {/* 간병인 FAQ 버튼 */}
             <button
                 className="flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple hover:bg-purple-700 transition-colors duration-150"
+                onClick={() => handleButtonClick("1")}
             >
                 <div className="flex items-center">
                     <svg
@@ -21,9 +36,11 @@ function FAQIndex() {
                 </div>
             </button>
 
+            {/* 보호자/피간병인 FAQ 버튼 */}
             <button
                 className="flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold text-black bg-white rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple border-2 border-purple-700 hover:bg-gray-50 transition-colors duration-150"
-                >
+                onClick={() => handleButtonClick("2")}
+            >
                 <div className="flex items-center">
                     <svg
                         className="w-5 h-5 mr-2"
@@ -38,7 +55,8 @@ function FAQIndex() {
                 </div>
             </button>
 
-            <Outlet/>
+            {/* 선택된 카테고리에 따라 다른 내용 출력 */}
+            <FAQListTableComponent selectedCategory={selectedCategory} />
         </BasicLayout>
     );
 }
