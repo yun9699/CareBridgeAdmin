@@ -10,3 +10,13 @@ export const getCareTakerList = async (page) => {
     console.log(res.data)
     return res.data;
 }
+
+export const deleteTaker = async (qno) => {
+
+    const res = await axios.post(`${host}/delete/${qno}`)
+
+    console.log(res.data)
+
+    return res.data
+}
+
