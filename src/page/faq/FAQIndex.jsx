@@ -1,13 +1,11 @@
 import BasicLayout from "../../layout/BasicLayout.jsx";
 import {Outlet} from "react-router-dom";
 
-
 function FAQIndex() {
     return (
         <BasicLayout>
-
-            <a
-                className="flex items-center justify-between p-4 mb-4 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
+            <button
+                className="flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple hover:bg-purple-700 transition-colors duration-150"
             >
                 <div className="flex items-center">
                     <svg
@@ -21,11 +19,11 @@ function FAQIndex() {
                     </svg>
                     <span>간병인 FAQ</span>
                 </div>
-            </a>
+            </button>
 
-            <a
-                className="flex items-center justify-between p-4 mb-4 text-sm font-semibold text-black bg-white rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple border-2 border-purple-700"
-            >
+            <button
+                className="flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold text-black bg-white rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple border-2 border-purple-700 hover:bg-gray-50 transition-colors duration-150"
+                >
                 <div className="flex items-center">
                     <svg
                         className="w-5 h-5 mr-2"
@@ -38,10 +36,9 @@ function FAQIndex() {
                     </svg>
                     <span>보호자/피간병인 FAQ</span>
                 </div>
-            </a>
+            </button>
 
             <Outlet/>
-
         </BasicLayout>
     );
 }
