@@ -1,17 +1,7 @@
 
-
-
-const makeArr = (from, to, prev, next) => {
+const makeArr = (from, to) => {
 
   let arr = []
-
-  if(prev){
-    arr.push(from -1)
-  }
-
-  if(next){
-    arr.push(next)
-  }
 
   for (let i = from; i <= to ; i++) {
     arr.push(i)
@@ -22,7 +12,7 @@ const makeArr = (from, to, prev, next) => {
 
 function PageComponent({pageResponse}) {
 
-  const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage, false, false);
+  const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage);
 
   const lis = pageNums.map(num => (
 
@@ -30,7 +20,7 @@ function PageComponent({pageResponse}) {
           key={num}
           className={`mx-1 px-4 py-2 text-sm font-semibold border rounded-md 
     ${
-              (pageResponse.pageRequest.page ) === num
+              (pageResponse.pageRequest.page + 1) === num
                   ? 'bg-green-600 text-white border-green-600' // 활성 페이지 스타일
                   : 'bg-white text-green-500 border-green-500 hover:bg-green-600 hover:text-white' // 기본 스타일
           } 
