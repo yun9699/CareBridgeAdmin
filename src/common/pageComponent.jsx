@@ -10,7 +10,7 @@ const makeArr = (from, to) => {
   return arr
 }
 
-function PageComponent({pageResponse}) {
+function PageComponent({pageResponse, changePage}) {
 
   const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage);
 
@@ -25,6 +25,7 @@ function PageComponent({pageResponse}) {
                   : 'bg-white text-green-500 border-green-500 hover:bg-green-600 hover:text-white' // 기본 스타일
           } 
       focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-200 ease-in-out`}
+          onClick={() => changePage(num)}
       >
         {num}
       </li>

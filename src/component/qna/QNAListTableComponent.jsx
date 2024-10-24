@@ -16,19 +16,26 @@ const init = {
 function QNAListTableComponent() {
 
     const [qna, setQna] = useState(init);
-
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [page, setPage] = useState(1);
 
     const pageQuery = searchParams.get("page") || "";
+
+    const changePage = (pageNum) => {
+
+        setPage(pageNum);
+        setSearchParams({page: pageNum});
+        window.location.reload();
+    }
 
 
 
     useEffect(() => {
         getList(pageQuery).then((res) => {
-            console.log(res);
+
             setQna(res);
         })
-    }, []);
+    }, [page, searchParams]);
 
     return (
         <>
@@ -94,7 +101,7 @@ function QNAListTableComponent() {
                     <tr>
                         <td colSpan="4">
                             <div className="flex justify-center items-center py-4">
-                                <PageComponent pageResponse={qna} />
+                                <PageComponent pageResponse={qna} changePage={changePage} />
                             </div>
                         </td>
                     </tr>
