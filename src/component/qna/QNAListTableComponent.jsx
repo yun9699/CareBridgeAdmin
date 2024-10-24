@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {getList} from "@/api/qnaAPI.js";
 import PageComponent from "@/common/pageComponent.jsx";
+import {useSearchParams} from "react-router-dom";
 
 const init = {
     list: [],
@@ -9,16 +10,21 @@ const init = {
     pageRequest: [],
     total: 0,
     startPage: 0,
-    prev: false,
-    pageResponse: []
+    prev: false
 }
 
 function QNAListTableComponent() {
 
     const [qna, setQna] = useState(init);
 
+    const [searchParams] = useSearchParams();
+
+    const pageQuery = searchParams.get("page") || "";
+
+
+
     useEffect(() => {
-        getList().then((res) => {
+        getList(pageQuery).then((res) => {
             console.log(res);
             setQna(res);
         })
@@ -50,7 +56,7 @@ function QNAListTableComponent() {
                                         />
                                     </div>
                                     <div>
-                                        <p className="font-medium text-gray-900">{item.qtitle}</p>
+                                        <p className="font-medium text-gray-900">{item.qno}</p>
                                         <p className="text-xs text-gray-500">QNA Topic</p>
                                     </div>
                                 </div>
