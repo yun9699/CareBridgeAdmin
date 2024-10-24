@@ -10,3 +10,10 @@ export const getCareGiverList = async (page) => {
     console.log(res.data);
     return res.data;
 }
+
+export const getCareGiverOne = async (cgno) => {
+
+    const res = await axios.get(`${host}/read/${cgno}`);
+    console.log(res.data)
+    return res.data;
+}

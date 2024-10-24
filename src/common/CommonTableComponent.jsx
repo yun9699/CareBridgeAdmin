@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PageComponent from "@/common/pageComponent.jsx";
 import { useSearchParams } from "react-router-dom";
 import {getCareGiverList} from "@/api/caregiverAPI.js";
+import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 
 const init = {
     list: [],
@@ -25,17 +26,25 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ tmp, func }) {
+function CommonTableComponent({ tmp, func, type }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
+    const [detailOpen, setDetailOpen] = useState(false);
+    const [no, setNo] = useState(0);
 
     const pageQuery = searchParams.get("page") || "";
 
     const changePage = (pageNum) => {
         setPage(pageNum);
         setSearchParams({ page: pageNum });
-        window.location.reload();
+    }
+
+    const detailClick = (no) => {
+
+        setDetailOpen(true)
+        setNo(no);
+        console.log(no)
     }
 
     useEffect(() => {
@@ -47,6 +56,13 @@ function CommonTableComponent({ tmp, func }) {
 
     return (
         <div className="overflow-x-auto p-4">
+
+            {detailOpen &&
+                <CommonDetailComponent isOpen={detailOpen}
+                                       onClose={() => setDetailOpen(false)}
+                                       no={no}
+                />}
+
             <table className="min-w-full leading-normal border border-gray-300 rounded-lg shadow-lg">
                 <thead className="bg-gradient-to-r from-green-400 to-green-500 text-white">
                 <tr className="text-sm font-semibold text-left uppercase tracking-wide">
@@ -59,7 +75,8 @@ function CommonTableComponent({ tmp, func }) {
 
                 <tbody className="bg-white">
                 {data.list.map((item) => (
-                    <tr key={item[tmp[0]]} className="hover:bg-gray-100 border-b border-gray-200">
+                    <tr key={item[tmp[0]]} className="hover:bg-gray-100 border-b border-gray-200"
+                        onClick={() => detailClick(Object.values(item)[0])}>
                         {tmp.map((temp) => (
                             <td key={temp} className="px-5 py-4 text-sm text-gray-600">
                                 {temp.endsWith('Date') ? formatDate(item[temp]) : item[temp]}
