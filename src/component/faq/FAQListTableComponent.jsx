@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getFAQList } from "../../api/faqAPI";
 
 const init = {
     list: []
@@ -7,34 +8,26 @@ const init = {
 function FAQListTableComponent({ selectedCategory }) {
     const [faq, setFaq] = useState(init);
 
-    // 데이터 가져오기 함수
-    const getFAQList = () => {
-        fetch('http://10.10.10.105:8080/api/v1/faq/list', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                setFaq({ list: data });
-            })
-            .catch((error) => {
-                console.error('Error fetching FAQ list:', error);
-            });
-    };
-
+    // FAQ API 가져오기
     useEffect(() => {
-        getFAQList(); // 컴포넌트가 마운트될 때 FAQ 목록을 가져옵니다.
+        const loadFAQData = async () => {
+            try {
+                const data = await getFAQList();
+                setFaq({ list: data });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        loadFAQData(); // 컴포넌트가 마운트될 때 FAQ 목록을 가져옵니다.
     }, []);
 
-    // 선택된 카테고리로 필터링된 FAQ 목록 만들기
+    // 선택된 카테고리만 보이게 하기
     const seletedFaqList = faq.list.filter((item) => {
         return selectedCategory === "" || item.fcategory === selectedCategory;
     });
 
-    // fcategory값을 텍스트로 출력하는 기능
+    // fcategory값을 텍스트로 출력하기
     const changeCategoryOutput = (fcategory) => {
         if (fcategory === "1") {
             return "간병인";
@@ -58,7 +51,7 @@ function FAQListTableComponent({ selectedCategory }) {
             {seletedFaqList.length === 0 ? (
                 <tr>
                     <td colSpan="3" className="px-4 py-3 text-center text-gray-500">
-                        No FAQs available
+                        해당하는 FAQ가 없습니다
                     </td>
                 </tr>
             ) : (

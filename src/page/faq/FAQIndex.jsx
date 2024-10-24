@@ -1,14 +1,15 @@
 import BasicLayout from "../../layout/BasicLayout.jsx";
 import React, { useState } from "react";
-import FAQListTableComponent from "../../component/faq/FAQListTableComponent.jsx"
+import FAQListTableComponent from "../../component/faq/FAQListTableComponent.jsx";
 
 function FAQIndex() {
     // selectedCategory : 현재 선택된 카테고리, changSelectedCategory : 카테고리 변경하기
-    const [selectedCategory, changeSelectedCategory] = useState("간병인");
+    // 테이블 초기값은 fcategory가 "1"인값 출력하기
+    const [selectedCategory, changeSelectedCategory] = useState("1");
 
     // 버튼 클릭 시 카테고리 변경하기
-    const handleButtonClick = (category) => {
-        changeSelectedCategory(category);
+    const handleButtonClick = (fcategory) => {
+        changeSelectedCategory(fcategory);
     };
 
     return (
