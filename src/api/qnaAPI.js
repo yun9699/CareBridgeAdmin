@@ -5,11 +5,15 @@ import axios from "axios";
 const host = 'http://10.10.10.105:8080/api/v1/qna'
 
 
-export const getList = async () => {
+export const getList = async (page) => {
 
-    const res = await axios.get(`${host}/list`)
+    const pageValue = (Number)(page || 1) // 없으면 1
 
+    const res = await axios.get(`${host}/list?page=${pageValue}`)
+
+    console.log(res)
     console.log(res.data)
     return res.data
 }
+
 
