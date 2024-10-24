@@ -16,12 +16,11 @@ const makeArr = (from, to, prev, next) => {
 
 function PageComponent({pageResponse}) {
 
+  console.log("-------")
+  console.log(pageResponse);
   const current = pageResponse.pageRequest.page + 1;
-  const tempLast = Math.ceil(current / 10.0) * 10;
-  const startPage = tempLast - 9;
-  const endPage = pageResponse.total < tempLast ? pageResponse.total : tempLast;
 
-  const pageNums = makeArr(startPage, endPage, false, false);
+  const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage, false, false);
 
   const lis = pageNums.map(num => (
 
