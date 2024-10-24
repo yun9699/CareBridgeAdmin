@@ -20,7 +20,7 @@ function PageComponent({pageResponse}) {
           key={num}
           className={`mx-1 px-4 py-2 text-sm font-semibold border rounded-md 
     ${
-              (pageResponse.pageRequest.page + 1) === num
+              (pageResponse.pageRequest.page) === num
                   ? 'bg-green-600 text-white border-green-600' // 활성 페이지 스타일
                   : 'bg-white text-green-500 border-green-500 hover:bg-green-600 hover:text-white' // 기본 스타일
           } 
