@@ -11,6 +11,16 @@ export const getCareGiverList = async (page) => {
     return res.data;
 }
 
+export const deleteGiver = async (qno) => {
+
+    const res = await axios.post(`${host}/delete/${qno}`)
+
+    console.log(res.data)
+
+    return res.data
+}
+
+
 export const getCareGiverOne = async (cgno) => {
 
     const res = await axios.get(`${host}/read/${cgno}`);

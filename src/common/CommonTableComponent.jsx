@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import PageComponent from "@/common/pageComponent.jsx";
 import { useSearchParams } from "react-router-dom";
-import {getCareGiverList} from "@/api/caregiverAPI.js";
+import {deleteGiver} from "@/api/caregiverAPI.js";
+import {deleteQNA} from "@/api/qnaAPI.js";
+import {deleteTaker} from "@/api/caretakerAPI.js";
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 
 const init = {
@@ -30,6 +32,7 @@ function CommonTableComponent({ tmp, func, detailFn}) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
+    const [refresh, setRefresh] = useState(false);
     const [detailOpen, setDetailOpen] = useState(false);
     const [no, setNo] = useState(0);
 
@@ -47,12 +50,38 @@ function CommonTableComponent({ tmp, func, detailFn}) {
         console.log(no)
     }
 
+
+    const ClikedeleteDate = (item) => {
+        if (item.qno) {
+            deleteQNA(item.qno).then(res => {
+                console.log(res);
+                setRefresh(true);
+            });
+        }
+        else if (item.ctno) {
+            deleteTaker(item.ctno).then(res => {
+                console.log(res);
+                setRefresh(true);
+            });
+        }
+        else if (item.cgno){
+            deleteGiver(item.cgno).then(res => {
+                console.log(res);
+                setRefresh(true);
+            })
+        }
+        setRefresh(false);
+    };
+
+
+
+
     useEffect(() => {
         func(pageQuery).then((res) => {
             setData(res);
             console.log(res);
         })
-    }, [page, searchParams]);
+    }, [page, searchParams,refresh]);
 
     return (
         <div className="overflow-x-auto p-4">
@@ -95,7 +124,8 @@ function CommonTableComponent({ tmp, func, detailFn}) {
                                 </button>
                                 <button
                                     className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
-                                    aria-label="Delete">
+                                    aria-label="Delete"
+                                    onClick={() => ClikedeleteDate(item)}>
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             fillRule="evenodd"
