@@ -1,15 +1,19 @@
-import {lazy} from "react";
+import {lazy, Suspense} from "react";
+import LoadingPage from "@/page/LoadingPage.jsx";
 
 const FAQIndexBase = lazy(() => import('../page/faq/FAQIndex.jsx'))
 const FAQ = lazy(() => import('../page/faq/FAQPage.jsx'))
 
+
+const Loading = <LoadingPage/>
+
 const FaqRouter = {
     path: "/faq",
-    element: <FAQIndexBase/>,
+    element: <Suspense fallback={Loading}><FAQIndexBase/></Suspense>,
     children: [
         {
             path: "",
-            element: <FAQ/>
+            element: <Suspense fallback={Loading}><FAQ/></Suspense>
         },
     ]
 }
