@@ -11,7 +11,7 @@ const makeArr = (from, to) => {
   return arr
 }
 
-function PageComponent({pageResponse}) {
+function PageComponent({pageResponse, changePage}) {
 
   const pageNums = makeArr(pageResponse.startPage, pageResponse.endPage);
 
