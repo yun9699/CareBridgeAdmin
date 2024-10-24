@@ -1,20 +1,23 @@
-import {lazy} from "react";
+import {lazy, Suspense} from "react";
+import LoadingPage from "@/page/LoadingPage.jsx";
 
 const QNAIndexBase = lazy(() => import('../page/qna/QNAIndex.jsx'))
 const QNA = lazy(() => import('../page/qna/QNAPage.jsx'))
 const ReadPage = lazy(() => import('../page/qna/QNAReadPage.jsx'))
 
+const Loading = <LoadingPage/>
+
 const QnaRouter = {
     path: "/qna",
-    element: <QNAIndexBase/>,
+    element: <Suspense fallback={Loading}><QNAIndexBase/></Suspense>,
     children: [
         {
             path: "list",
-            element: <QNA/>
+            element: <Suspense fallback={Loading}><QNA/></Suspense>
         },
         {
             path:'read',
-            element: <ReadPage/>
+            element: <Suspense fallback={Loading}><ReadPage/></Suspense>
         }
     ]
 }

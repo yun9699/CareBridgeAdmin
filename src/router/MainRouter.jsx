@@ -4,12 +4,16 @@ import QNARouter from "./QNARouter.jsx";
 import CareGiverRouter from "./CareGiverRouter.jsx";
 import CareTakerRouter from "./CareTakerRouter.jsx";
 import MainPage from "../page/MainPage.jsx";
+import LoadingPage from "@/page/LoadingPage.jsx";
+import {Suspense} from "react";
 
+
+const Loading = <LoadingPage/>
 
 const MainRouter = createBrowserRouter([
     {
         path: '/',
-        element: <MainPage/>,
+        element: <Suspense fallback={Loading}><MainPage/></Suspense>,
     },
     FAQRouter,
     QNARouter,
