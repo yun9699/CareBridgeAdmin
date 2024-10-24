@@ -5,7 +5,7 @@ import axios from "axios";
 const host = 'http://10.10.10.105:8080/api/v1/qna'
 
 
-export const getList = async (page) => {
+export const getQNAList = async (page) => {
 
     const pageValue = (Number)(page || 1) // 없으면 1
 
