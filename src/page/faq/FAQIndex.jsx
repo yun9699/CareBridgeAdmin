@@ -14,13 +14,27 @@ function FAQIndex() {
 
     return (
         <BasicLayout>
-            <h1 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                FAQ 관리 페이지
-            </h1>
+            <div className="flex items-center justify-between my-6">
+                <h1 className=" text-2xl font-semibold text-gray-700 dark:text-gray-200">
+                    FAQ 관리 페이지
+                </h1>
+                {/* 신규작성 버튼 */}
+                <button
+                    className="p-4 text-sm font-semibold text-white bg-[#a0c49d] rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple hover:bg-green-400 transition-colors duration-150"
+                    onClick={() => console.log("추가하기 버튼 클릭됨")}
+                >
+                    신규작성
+                </button>
+            </div>
+
 
             {/* 간병인 FAQ 버튼 */}
             <button
-                className="flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple hover:bg-purple-700 transition-colors duration-150"
+                className={`flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple transition-colors duration-150 ${
+                    selectedCategory === "1"
+                        ? "text-purple-100 bg-purple-600 hover:bg-purple-700"
+                        : "text-black bg-white border-2 border-purple-700 hover:bg-gray-50"
+                }`}
                 onClick={() => handleButtonClick("1")}
             >
                 <div className="flex items-center">
@@ -39,7 +53,11 @@ function FAQIndex() {
 
             {/* 보호자/피간병인 FAQ 버튼 */}
             <button
-                className="flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold text-black bg-white rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple border-2 border-purple-700 hover:bg-gray-50 transition-colors duration-150"
+                className={`flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple transition-colors duration-150 ${
+                    selectedCategory === "2"
+                        ? "text-purple-100 bg-purple-600 hover:bg-purple-700"
+                        : "text-black bg-white border-2 border-purple-700 hover:bg-gray-50"
+                }`}
                 onClick={() => handleButtonClick("2")}
             >
                 <div className="flex items-center">
@@ -57,7 +75,7 @@ function FAQIndex() {
             </button>
 
             {/* 선택된 카테고리에 따라 다른 내용 출력 */}
-            <FAQListTableComponent selectedCategory={selectedCategory} />
+            <FAQListTableComponent selectedCategory={selectedCategory}/>
         </BasicLayout>
     );
 }
