@@ -2,26 +2,26 @@ import { useState } from 'react';
 import { insertFAQ } from "../../api/faqAPI";
 
 function FAQAddModalComponent({ isOpen, onClose }) {
+
+
     const [faqData, setFaqData] = useState({
         ftitle: "",
         fcategory: "1",
         fcontent: "",
     });
 
-    // 입력 필드 변경 핸들러
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFaqData((prev) => ({ ...prev, [name]: value }));
     };
 
-    // 등록 버튼 클릭 시 FAQ 데이터 전송
     const handleSubmit = async () => {
         try {
             await insertFAQ(faqData);
             alert("FAQ 등록 완료!");
             setFaqData({ ftitle: "", fcategory: "1", fcontent: "" }); // 입력 필드 초기화
             onClose(); // 모달 닫기
-        } catch (error) {
+        } catch (e) {
             alert("FAQ 등록 중 오류가 발생했습니다.");
         }
     };

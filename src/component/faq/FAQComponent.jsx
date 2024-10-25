@@ -1,13 +1,5 @@
-import React from 'react';
+import CommonTableComponent from "@/common/CommonTableComponent.jsx";
 
-function FaqComponent() {
-    return (
-        <div>
-            FAQ PAGE TEST
-            2222222222222222222222222222222222222222222222222222222222222222222222
-            2222222222222222222222222222222222222222222222222222
-        </div>
-    );
-}
-
-export default FaqComponent;
+const tmp = [
+    "fno", "ftitle", "f", "cgemail", "cgpw"
+];
