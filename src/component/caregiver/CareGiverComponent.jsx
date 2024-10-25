@@ -3,7 +3,7 @@ import {deleteGiver, getCareGiverList, getCareGiverOne} from "@/api/caregiverAPI
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 
 const tmp = [
-    "cgname", "cgage", "cgphone", "cgemail", "cgpw"
+    "cgno", "cgname", "cgage", "cgphone", "cgemail", "cgpw"
 ];
 
 function CareGiverComponent() {

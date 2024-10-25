@@ -79,7 +79,7 @@ function CommonTableComponent({ tmp, func, detailFn, delfn }) {
             <table className="min-w-full leading-normal border border-gray-300 rounded-lg shadow-lg">
                 <thead className="bg-gradient-to-r from-green-400 to-green-500 text-white">
                 <tr className="text-sm font-semibold text-left uppercase tracking-wide">
-                    {tmp.map((item) => (
+                    {tmp.slice(1).map((item) => (
                         <th key={item} className="px-5 py-3">{item}</th>
                     ))}
                     <th className="px-5 py-3">Actions</th>
@@ -88,9 +88,9 @@ function CommonTableComponent({ tmp, func, detailFn, delfn }) {
 
                 <tbody className="bg-white">
                 {data.list.map((item) => (
-                    <tr key={item[tmp[0]]} className="hover:bg-gray-100 border-b border-gray-200"
-                        >
-                        {tmp.map((temp) => (
+                    <tr key={item[tmp[0]]} className="hover:bg-gray-100 border-b border-gray-200">
+                        {/* 첫 번째 항목을 key로만 사용하고, 출력하지 않음 */}
+                        {tmp.slice(1).map((temp) => (
                             <td key={temp} className="px-5 py-4 text-sm text-gray-600">
                                 {temp.endsWith('Date') ? formatDate(item[temp]) : item[temp]}
                             </td>
@@ -124,11 +124,12 @@ function CommonTableComponent({ tmp, func, detailFn, delfn }) {
                 ))}
                 </tbody>
 
+
                 <tfoot>
                 <tr>
                     <td colSpan={tmp.length + 1}>
                         <div className="flex justify-center items-center py-4">
-                            <PageComponent pageResponse={data} changePage={changePage} />
+                            <PageComponent pageResponse={data} changePage={changePage}/>
                         </div>
                     </td>
                 </tr>
