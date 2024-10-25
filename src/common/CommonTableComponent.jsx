@@ -51,27 +51,10 @@ function CommonTableComponent({ tmp, func, detailFn}) {
     }
 
 
-    const ClikedeleteDate = (item) => {
-        if (item.qno) {
-            deleteQNA(item.qno).then(res => {
-                console.log(res);
-                setRefresh(true);
-            });
-        }
-        else if (item.ctno) {
-            deleteTaker(item.ctno).then(res => {
-                console.log(res);
-                setRefresh(true);
-            });
-        }
-        else if (item.cgno){
-            deleteGiver(item.cgno).then(res => {
-                console.log(res);
-                setRefresh(true);
-            })
-        }
-        setRefresh(false);
-    };
+    const ClikedeleteDate = (num) => {
+
+        console.log(num)
+    }
 
 
 
@@ -125,7 +108,7 @@ function CommonTableComponent({ tmp, func, detailFn}) {
                                 <button
                                     className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
                                     aria-label="Delete"
-                                    onClick={() => ClikedeleteDate(item)}>
+                                    onClick={() => ClikedeleteDate(Object.values(item[0]))}>
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             fillRule="evenodd"
