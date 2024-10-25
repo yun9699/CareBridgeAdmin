@@ -1,5 +1,5 @@
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
-import {getQNAList} from "@/api/qnaAPI.js";
+import {deleteQNA, getQNAList, getQNAOne} from "@/api/qnaAPI.js";
 
 const tmp = [
     "qtitle", "regDate", "modDate", "qdelete"
@@ -8,7 +8,7 @@ const tmp = [
 function QNAListTableComponent() {
     return (
         <div>
-            <CommonTableComponent tmp={tmp} func={getQNAList}></CommonTableComponent>
+            <CommonTableComponent tmp={tmp} func={getQNAList} detailFn={getQNAOne} delfn={deleteQNA}></CommonTableComponent>
         </div>
     );
 }

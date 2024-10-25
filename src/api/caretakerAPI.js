@@ -20,3 +20,10 @@ export const deleteTaker = async (qno) => {
     return res.data
 }
 
+export const getCareTakerOne = async (ctno) => {
+
+    const res = await axios.get(`${host}/read/${ctno}`);
+    console.log(res.data)
+    return res.data;
+}
+

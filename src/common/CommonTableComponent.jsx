@@ -28,7 +28,7 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ tmp, func, detailFn}) {
+function CommonTableComponent({ tmp, func, detailFn, delfn }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -51,10 +51,10 @@ function CommonTableComponent({ tmp, func, detailFn}) {
     }
 
 
-    const ClikedeleteDate = (num) => {
+    const ClikedeleteDate = (no) => {
 
-        console.log(num)
-    }
+        delfn(no)
+    };
 
 
 
@@ -89,7 +89,7 @@ function CommonTableComponent({ tmp, func, detailFn}) {
                 <tbody className="bg-white">
                 {data.list.map((item) => (
                     <tr key={item[tmp[0]]} className="hover:bg-gray-100 border-b border-gray-200"
-                        onClick={() => detailClick(Object.values(item)[0])}>
+                        >
                         {tmp.map((temp) => (
                             <td key={temp} className="px-5 py-4 text-sm text-gray-600">
                                 {temp.endsWith('Date') ? formatDate(item[temp]) : item[temp]}
@@ -99,7 +99,8 @@ function CommonTableComponent({ tmp, func, detailFn}) {
                             <div className="flex items-center space-x-4">
                                 <button
                                     className="text-blue-500 hover:text-blue-700 transition duration-150 ease-in-out"
-                                    aria-label="Edit">
+                                    aria-label="Edit"
+                                    onClick={() => detailClick(Object.values(item)[0])}>
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
@@ -108,7 +109,7 @@ function CommonTableComponent({ tmp, func, detailFn}) {
                                 <button
                                     className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
                                     aria-label="Delete"
-                                    onClick={() => ClikedeleteDate(Object.values(item[0]))}>
+                                    onClick={() => ClikedeleteDate(Object.values(item)[0])}>
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             fillRule="evenodd"

@@ -1,11 +1,26 @@
 import BasicLayout from "../../layout/BasicLayout.jsx";
 import React, { useState } from "react";
 import FAQListTableComponent from "../../component/faq/FAQListTableComponent.jsx";
+import FAQAddModalComponent from "../../component/faq/FAQAddModalComponent.jsx";
 
 function FAQIndex() {
     // selectedCategory : 현재 선택된 카테고리, changSelectedCategory : 카테고리 변경하기
     // 테이블 초기값은 fcategory가 "1"인값 출력하기
     const [selectedCategory, changeSelectedCategory] = useState("1");
+
+    // 모달 상태 관리
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // 신규작성 버튼 클릭 시 모달 열기
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    // 모달 닫기
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
 
     // 버튼 클릭 시 카테고리 변경하기
     const handleButtonClick = (fcategory) => {
@@ -21,7 +36,7 @@ function FAQIndex() {
                 {/* 신규작성 버튼 */}
                 <button
                     className="p-4 text-sm font-semibold text-white bg-[#a0c49d] rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple hover:bg-green-400 transition-colors duration-150"
-                    onClick={() => console.log("추가하기 버튼 클릭됨")}
+                    onClick={openModal}
                 >
                     신규작성
                 </button>
@@ -74,8 +89,9 @@ function FAQIndex() {
                 </div>
             </button>
 
-            {/* 선택된 카테고리에 따라 다른 내용 출력 */}
+
             <FAQListTableComponent selectedCategory={selectedCategory}/>
+            <FAQAddModalComponent isOpen={isModalOpen} onClose={closeModal} />
         </BasicLayout>
     );
 }

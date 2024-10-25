@@ -10,7 +10,7 @@ function FAQListTableComponent({ selectedCategory }) {
 
     // FAQ API 가져오기
     useEffect(() => {
-        const loadFAQData = async () => {
+        const FaqLoadList = async () => {
             try {
                 const data = await getFAQList();
                 setFaq({ list: data });
@@ -19,7 +19,7 @@ function FAQListTableComponent({ selectedCategory }) {
             }
         };
 
-        loadFAQData(); // 컴포넌트가 마운트될 때 FAQ 목록을 가져옵니다.
+        FaqLoadList(); // 컴포넌트가 마운트될 때 FAQ 목록을 가져옵니다.
     }, []);
 
     // 선택된 카테고리만 보이게 하기
