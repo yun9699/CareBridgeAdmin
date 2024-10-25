@@ -22,4 +22,11 @@ export const deleteQNA = async (qno) => {
     return res.data
 }
 
+export const getQNAOne = async (qno) => {
+
+    const res = await axios.get(`${host}/read/${qno}`);
+    console.log(res.data)
+    return res.data;
+}
+
 
