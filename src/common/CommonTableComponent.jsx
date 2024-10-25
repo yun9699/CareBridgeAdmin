@@ -53,7 +53,11 @@ function CommonTableComponent({ tmp, func, detailFn, delfn }) {
 
     const ClikedeleteDate = (no) => {
 
-        delfn(no)
+        delfn(no).then((res) => {
+            console.log(res)
+            setRefresh(true);
+        })
+        setRefresh(false);
     };
 
 

@@ -23,3 +23,12 @@ export const insertFAQ = async (faqAdd) => {
         throw e;
     }
 };
+
+export const deleteFAQ = async (qno) => {
+
+    const res = await axios.post(`${host}/delete/${qno}`)
+
+    console.log(res.data)
+
+    return res.data
+}
