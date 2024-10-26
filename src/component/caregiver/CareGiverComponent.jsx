@@ -4,7 +4,7 @@ import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 import {deleteQNA} from "@/api/qnaAPI.js";
 
 const tmp = [
-    "cgname", "cgage", "cgphone", "cgemail", "cgpw"
+    "cgno", "cgname", "cgage", "cgphone", "cgemail", "cgpw"
 ];
 
 function CareGiverComponent() {
