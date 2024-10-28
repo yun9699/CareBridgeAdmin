@@ -29,3 +29,16 @@ export const getCareTakerOne = async (ctno) => {
     return res.data;
 }
 
+export const updateTaker = async (ctno, caretaker) => {
+
+    const res = await axios.post(`${host}/update/${ctno}`, caretaker, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    console.log(res.data)
+    console.log("-----------------")
+    return res.data;
+}
+
