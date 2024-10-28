@@ -5,11 +5,17 @@ const column = [
     "ctno", "ctname", "ctage", "ctemail", "ctphone", "ctaddress"
 ];
 
+const tableHeader = [
+    "name", "age", "phone", "email", "address"
+]
+
 function CareTakerComponent() {
 
 
     return (
-        <CommonTableComponent column={column}
+        <CommonTableComponent
+                              tableHeader={tableHeader}
+                              column={column}
                               listFn={getCareTakerList}
                               detailFn={getCareTakerOne}
                               delfn={deleteTaker}

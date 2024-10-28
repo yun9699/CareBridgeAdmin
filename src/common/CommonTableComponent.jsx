@@ -28,7 +28,7 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ column, listFn, detailFn, delfn }) {
+function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -80,7 +80,7 @@ function CommonTableComponent({ column, listFn, detailFn, delfn }) {
             <table className="min-w-full leading-normal border border-gray-300 rounded-lg shadow-lg">
                 <thead className="bg-gradient-to-r from-green-400 to-green-500 text-white">
                 <tr className="text-sm font-semibold text-left uppercase tracking-wide">
-                    {column.slice(1).map((item) => (
+                    {tableHeader.map((item) => (
                         <th key={item} className="px-5 py-3">{item}</th>
                     ))}
                     <th className="px-5 py-3">Actions</th>

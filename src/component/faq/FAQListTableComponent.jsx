@@ -7,13 +7,19 @@ const column = [
     "fno", "fcategory", "ftitle"
 ];
 
+const tableHeader = [
+    "category", "title"
+]
+
 function FAQListTableComponent({ selectedCategory }) {
 
 
     return (
         <div>
-            <CommonTableComponent column={column}
-                                  listFn={getFAQList}
+            <CommonTableComponent
+                                tableHeader={tableHeader}
+                                column={column}
+                                listFn={getFAQList}
             >
             </CommonTableComponent>
         </div>);
