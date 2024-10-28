@@ -71,6 +71,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
     const ClickCloseModal = () => {
         setIsModalOpen(false);
         setDeleteRight(false);
+        setEditRight(false);
         console.log("Click Close")
     }
 
@@ -92,7 +93,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
             setData(res);
             console.log(res);
         })
-    }, [page, searchParams,refresh]);
+    }, [page, searchParams,refresh, listFn]);
 
     return (
         <div className="overflow-x-auto p-4">
@@ -103,6 +104,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                        no={no}
                                        detailFn={detailFn}
                                        updateFn={updateFn}
+                                       setEditRight = {setEditRight}
                                        editRight = {editRight}
                                        isModalOpen={isModalOpen}
                                        refresh={() => setRefresh(!refresh)}

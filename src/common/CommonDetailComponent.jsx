@@ -57,6 +57,12 @@ function CommonDetailComponent({ isOpen, onClose, no, refresh, detailFn, setEdit
         console.log(modalOpen);
     }
 
+    const handleClose = () => {
+        setEditRight(false);
+        console.log(editRight);
+        onClose();
+    }
+
 
 
     return (
@@ -66,6 +72,7 @@ function CommonDetailComponent({ isOpen, onClose, no, refresh, detailFn, setEdit
                 isModalOpen={modalOpen}
                 ClickCloseModal={() => setModalOpen(false)}
                 editRight={editRight}
+                setEditRight ={setEditRight}
                 editFn={updateDetail}
             ></CommonCheckModalComponent>}
 
@@ -77,7 +84,7 @@ function CommonDetailComponent({ isOpen, onClose, no, refresh, detailFn, setEdit
                 {/* 모달 닫기 버튼 */}
                 <button
                     className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-                    onClick={() => {onClose(); setEditRight(false)}}
+                    onClick = {() => handleClose()}
                 >
                     &times;
                 </button>
@@ -112,7 +119,7 @@ function CommonDetailComponent({ isOpen, onClose, no, refresh, detailFn, setEdit
 
                     <button
                         className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-150"
-                        onClick={onClose}
+                        onClick = {() => handleClose()}
                     >
                         닫기
                     </button>
