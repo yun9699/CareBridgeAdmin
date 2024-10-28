@@ -17,9 +17,7 @@ function FAQAddModalComponent({ isOpen, onClose }) {
     // 등록 버튼 클릭 시 FAQ 데이터 전송
     const handleSubmit = async () => {
             await insertFAQ(faqData);
-            alert("FAQ 등록 완료!");
             setFaqData({ ftitle: "", fcategory: "1", fcontent: "" }); // 입력 필드 초기화
-            onClose();
     };
 
     return (
