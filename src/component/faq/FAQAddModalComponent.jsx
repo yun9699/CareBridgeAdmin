@@ -16,14 +16,10 @@ function FAQAddModalComponent({ isOpen, onClose }) {
 
     // 등록 버튼 클릭 시 FAQ 데이터 전송
     const handleSubmit = async () => {
-        try {
             await insertFAQ(faqData);
             alert("FAQ 등록 완료!");
             setFaqData({ ftitle: "", fcategory: "1", fcontent: "" }); // 입력 필드 초기화
-            onClose(); // 모달 닫기
-        } catch (error) {
-            alert("FAQ 등록 중 오류가 발생했습니다.");
-        }
+            onClose();
     };
 
     return (
@@ -31,7 +27,7 @@ function FAQAddModalComponent({ isOpen, onClose }) {
             <div className="fixed inset-0 flex items-center justify-center z-50">
                 {/* 모달 뒤 어두운 배경 */}
                 <div className="absolute inset-0 bg-black opacity-50"></div>
-                <div className="bg-white rounded-lg shadow-lg p-8 relative z-10">
+                <div className="bg-white rounded-lg shadow-lg w-full max-w-md z-10 p-6 relative">
                     <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">FAQ 추가하기</h2>
 
                     {/* 제목 입력 */}
