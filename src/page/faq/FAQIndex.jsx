@@ -4,9 +4,9 @@ import FAQListTableComponent from "../../component/faq/FAQListTableComponent.jsx
 import FAQAddModalComponent from "../../component/faq/FAQAddModalComponent.jsx";
 
 function FAQIndex() {
-    // selectedCategory : 현재 선택된 카테고리, setSelectedCategory : 카테고리 변경하기
-    // 테이블 초기값은 fcategory가 "1"인 값 출력하기
-    const [selectedCategory, setSelectedCategory] = useState("1");
+    // selectedCategory : 현재 선택된 카테고리, changSelectedCategory : 카테고리 변경하기
+    // 테이블 초기값은 fcategory가 "1"인값 출력하기
+    const [selectedCategory, changeSelectedCategory] = useState("1");
 
     // 모달 상태 관리
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,9 +21,10 @@ function FAQIndex() {
         setIsModalOpen(false);
     };
 
+
     // 버튼 클릭 시 카테고리 변경하기
     const handleButtonClick = (fcategory) => {
-        setSelectedCategory(fcategory);
+        changeSelectedCategory(fcategory);
     };
 
     return (
@@ -40,6 +41,7 @@ function FAQIndex() {
                     신규작성
                 </button>
             </div>
+
 
             {/* 간병인 FAQ 버튼 */}
             <button
@@ -87,7 +89,8 @@ function FAQIndex() {
                 </div>
             </button>
 
-            <FAQListTableComponent selectedCategory={selectedCategory} />
+
+            <FAQListTableComponent selectedCategory={selectedCategory}/>
             <FAQAddModalComponent isOpen={isModalOpen} onClose={closeModal} />
         </BasicLayout>
     );

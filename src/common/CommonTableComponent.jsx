@@ -105,6 +105,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                        updateFn={updateFn}
                                        editRight = {editRight}
                                        isModalOpen={isModalOpen}
+                                       refresh={() => setRefresh(!refresh)}
 
                 />}
 

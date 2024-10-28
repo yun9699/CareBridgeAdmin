@@ -17,11 +17,11 @@ function FAQListTableComponent({ selectedCategory }) {
     return (
         <div>
             <CommonTableComponent
-                                tableHeader={tableHeader}
-                                column={column}
-                                listFn={getFAQList}
-                                detailFn={getFAQOne}
-                                updateFn={updateFAQ}
+                tableHeader={tableHeader}
+                column={column}
+                listFn={getFAQList}
+                detailFn={getFAQOne}
+                updateFn={updateFAQ}
             >
             </CommonTableComponent>
         </div>);
