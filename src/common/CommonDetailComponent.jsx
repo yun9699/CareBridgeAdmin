@@ -6,7 +6,7 @@ const init = {
     list: []
 };
 
-function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight, updateFn, editRight }) {
+function CommonDetailComponent({ isOpen, onClose, no, refresh, detailFn, setEditRight, updateFn, editRight }) {
     const [data, setData] = useState(init);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -47,6 +47,7 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight, up
             console.log("업데이트 성공:", response);
             setModalOpen(false);
             onClose();
+            refresh();
         });
     };
 
