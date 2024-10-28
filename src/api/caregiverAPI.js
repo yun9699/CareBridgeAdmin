@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const host = 'http://10.10.10.105:8080/api/v1/caregiver'
-const host = 'http://localhost:8080/api/v1/caregiver'
+const host = 'http://10.10.10.105:8080/api/v1/caregiver'
+// const host = 'http://localhost:8080/api/v1/caregiver'
 
 export const getCareGiverList = async (page) => {
 
