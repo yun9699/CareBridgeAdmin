@@ -34,10 +34,12 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight, up
     };
 
     const handleUpdate = () => {
+      
+        const keys = Object.keys(data.list[0]);
+        const firstKey = keys.length > 0 && keys[0].slice(-2) === no.toString() ? keys[0] : null;
 
-        setModalOpen(true);
-        console.log(modalOpen);
-
+        const updatedItem = { ...data.list[0] }; // 기존 객체 복사
+        if(firstKey != null)    delete updatedItem[firstKey]; // 첫 번째 키-값 쌍 삭
     };
 
 
@@ -83,8 +85,7 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight, up
                         onClick={() => {handleUpdate();
                            }}
                     >
-                        확인
-
+                        수정
                     </button>
                     {modalOpen && <CommonCheckModalComponent
                     />}

@@ -6,7 +6,6 @@ function CareTakerIndexPage() {
     return (
         <BasicLayout>
 
-            <div>CareTaker Index Page</div>
             <Outlet/>
 
         </BasicLayout>
