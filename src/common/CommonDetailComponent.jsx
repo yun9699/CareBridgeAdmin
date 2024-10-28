@@ -22,6 +22,8 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn }) {
         }
     }, [no]);
 
+
+
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
             {/* 오버레이 */}
