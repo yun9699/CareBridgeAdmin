@@ -36,6 +36,7 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight, up
     const handleUpdate = () => {
 
         setModalOpen(true);
+        console.log("----------------");
         console.log(modalOpen);
 
     };
@@ -87,7 +88,9 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight, up
 
                     </button>
                     {modalOpen && <CommonCheckModalComponent
-                    />}
+                        isModalOpen={setIsModalOpen(true)}
+                            />
+                        }
 
 
                     <button
