@@ -30,7 +30,7 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) {
+function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, updateFn }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -102,6 +102,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) 
                                        onClose={() => setDetailOpen(false)}
                                        no={no}
                                        detailFn={detailFn}
+                                       updateFn={updateFn}
                                        setEditRight = {setEditRight}
 
                 />}

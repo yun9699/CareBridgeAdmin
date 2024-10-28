@@ -28,3 +28,16 @@ export const getCareGiverOne = async (cgno) => {
     console.log(res.data)
     return res.data;
 }
+
+export const updateCareGiver = async (cgno, caregiver) => {
+
+    const res = await axios.post(`${host}/update/${cgno}`, caregiver, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    console.log(res.data)
+    console.log("-----------------")
+    return res.data;
+}
