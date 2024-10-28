@@ -1,5 +1,6 @@
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
 import {
+    approveGiver,
     deleteGiver,
     getCareGiverList,
     getCareGiverOne,
@@ -23,6 +24,8 @@ function CareGiverComponent() {
 
     const listFn = list ? getCareGiverList : getNotApprovedGiverList;
 
+    const actionSelect = list ? null : approveGiver;
+
     const handleSelectOption = (selectedList) => {
         setList(selectedList);
     };
@@ -40,6 +43,7 @@ function CareGiverComponent() {
                                   detailFn={getCareGiverOne}
                                   delfn={deleteGiver}
                                   updateFn={updateCareGiver}
+                                  actionSelect={actionSelect}
             >
             </CommonTableComponent>
         </div>

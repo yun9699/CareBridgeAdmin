@@ -30,7 +30,7 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, updateFn }) {
+function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, updateFn, actionSelect }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -87,6 +87,15 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
         setRefresh(true);
     };
 
+    const approveClick = (no) => {
+
+        actionSelect(no).then((res) => {
+
+            console.log(res);
+            setRefresh(!refresh);
+        })
+    }
+
 
     useEffect(() => {
         listFn(pageQuery).then((res) => {
@@ -117,7 +126,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                     {tableHeader.map((item) => (
                         <th key={item} className="px-5 py-3">{item}</th>
                     ))}
-                    <th className="px-5 py-3">Actions</th>
+                    <th className="px-5 py-3">Action</th>
                 </tr>
                 </thead>
 
@@ -131,44 +140,68 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                     temp.endsWith('Date') ? formatDate(item[temp]) : item[temp]}
                             </td>
                         ))}
-                        <td className="px-5 py-4 text-sm">
-                            <div className="flex items-center space-x-4">
-                                <button
-                                    className="text-blue-500 hover:text-blue-700 transition duration-150 ease-in-out"
-                                    aria-label="Edit"
-                                    onClick={() => {detailClick(Object.values(item)[0]);
-                                    setEditRight(true)}}
-                                    >
-                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                                        <path
-                                            d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                                    </svg>
-                                </button>
-                                <CommonCheckModalComponent
-                                    isModalOpen={isModalOpen}
-                                    ClickCloseModal = {ClickCloseModal}
-                                    ClikeChoice = {ClikeChoice}
-                                    throwNum = {no}
-                                    deleteRight = {deleteRight}
-                                    editRight = {editRight}
-                                />
-                                <button
-                                    className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
-                                    aria-label="Delete"
-                                    onClick={() =>  {ClickOpenModal(Object.values(item)[0]);
-                                    setDeleteRight(true)}}
-                                >
 
-                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                            clipRule="evenodd"
-                                        ></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
+                        {actionSelect && (
+
+                            <td className="px-5 py-4 text-sm">
+                                <div className="flex items-center justify-center">
+                                    <button
+                                        className="px-4 py-2 text-white bg-green-500 hover:bg-green-600 rounded transition duration-150 ease-in-out"
+                                        aria-label="Approve"
+                                        onClick={() => approveClick(item[column[0]])}
+                                    >
+                                        승인
+                                    </button>
+                                </div>
+                            </td>
+
+                        )}
+                        {!actionSelect && (
+
+                            <td className="px-5 py-4 text-sm">
+                                <div className="flex items-center space-x-4">
+                                    <button
+                                        className="text-blue-500 hover:text-blue-700 transition duration-150 ease-in-out"
+                                        aria-label="Edit"
+                                        onClick={() => {
+                                            detailClick(Object.values(item)[0]);
+                                            setEditRight(true)
+                                        }}
+                                    >
+                                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                                        </svg>
+                                    </button>
+                                    <CommonCheckModalComponent
+                                        isModalOpen={isModalOpen}
+                                        ClickCloseModal={ClickCloseModal}
+                                        ClikeChoice={ClikeChoice}
+                                        throwNum={no}
+                                        deleteRight={deleteRight}
+                                        editRight={editRight}
+                                    />
+                                    <button
+                                        className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
+                                        aria-label="Delete"
+                                        onClick={() => {
+                                            ClickOpenModal(Object.values(item)[0]);
+                                            setDeleteRight(true)
+                                        }}
+                                    >
+
+                                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                clipRule="evenodd"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        )}
+
                     </tr>
                 ))}
                 </tbody>

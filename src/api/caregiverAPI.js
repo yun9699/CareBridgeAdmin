@@ -50,3 +50,10 @@ export const getNotApprovedGiverList = async (page) => {
     console.log(res.data);
     return res.data;
 }
+
+export const approveGiver = async (cgno) => {
+
+    const res = await axios.put(`${host}/approve/${cgno}`);
+    console.log(res.data)
+    return res.data;
+}
