@@ -110,7 +110,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) 
                 {data.list.map((item) => (
                     <tr key={item[column[0]]} className="hover:bg-gray-100 border-b border-gray-200">
                         {/* 첫 번째 항목을 key로만 사용하고, 출력하지 않음 */}
-                        {tmp.slice(1).map((temp) => (
+                        {column.slice(1).map((temp) => (
                             <td key={temp} className="px-5 py-4 text-sm text-gray-600" >
                                 {temp === 'checkAnswer' ? (item[temp] ? "답변완료" : "답변대기") :
                                     temp.endsWith('Date') ? formatDate(item[temp]) : item[temp]}
