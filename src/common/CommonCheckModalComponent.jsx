@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClikeChoice, throwNum, deleteRight, editRight }) {
+function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClikeChoice, throwNum, deleteRight, editRight, editFn }) {
     if (!isModalOpen) {
         return null;
     }
@@ -24,7 +24,7 @@ function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClikeChoice, 
                     </button>}
                     {editRight && <button
                         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                        onClick={() => ClikeChoice(throwNum)}
+                        onClick={editFn}
                     >
                         수정
                     </button>}
