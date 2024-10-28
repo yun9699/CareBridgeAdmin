@@ -1,6 +1,6 @@
 import BasicLayout from "../../layout/BasicLayout.jsx";
 import React, { useState } from "react";
-import FAQListTableComponent from "../../component/faq/FAQListTableComponent.jsx";
+import FAQComponent from "../../component/faq/FAQComponent.jsx";
 import FAQAddModalComponent from "../../component/faq/FAQAddModalComponent.jsx";
 
 function FAQIndex() {
@@ -80,7 +80,7 @@ function FAQIndex() {
             </button>
 
 
-            <FAQListTableComponent/>
+            <FAQComponent/>
             <FAQAddModalComponent isOpen={isModalOpen} onClose={closeModal} />
         </BasicLayout>
     );

@@ -1,13 +1,40 @@
-import React from 'react';
+import CommonTableComponent from "@/common/CommonTableComponent.jsx";
+import {getFAQListGiver, getFAQListTaker, getFAQOne, updateFAQ} from "@/api/faqAPI.js";
+import {useEffect, useState} from "react";
+import {}
+import {getCareGiverList, getNotApprovedGiverList} from "@/api/caregiverAPI.js";
 
-function FaqComponent() {
+
+const column = [
+    "fno", "fcategory", "ftitle"
+];
+
+const tableHeader = [
+    "category", "title"
+]
+
+function FAQComponent() {
+
+    const [list, setList] = useState(true);
+
+    const listFn = list ? getFAQListGiver : getFAQListTaker;
+
+    const handleSelectOption = (selectedList) => {
+        setList(selectedList);
+    };
+
     return (
         <div>
-            FAQ PAGE TEST
-            2222222222222222222222222222222222222222222222222222222222222222222222
-            2222222222222222222222222222222222222222222222222222
-        </div>
-    );
+            <
+            <CommonTableComponent
+                tableHeader={tableHeader}
+                column={column}
+                listFn={getFAQList}
+                detailFn={getFAQOne}
+                updateFn={updateFAQ}
+            >
+            </CommonTableComponent>
+        </div>);
 }
 
-export default FaqComponent;
+export default FAQComponent;
