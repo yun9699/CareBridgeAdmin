@@ -4,9 +4,6 @@ import FAQListTableComponent from "../../component/faq/FAQListTableComponent.jsx
 import FAQAddModalComponent from "../../component/faq/FAQAddModalComponent.jsx";
 
 function FAQIndex() {
-    // selectedCategory : 현재 선택된 카테고리, changSelectedCategory : 카테고리 변경하기
-    // 테이블 초기값은 fcategory가 "1"인값 출력하기
-    const [selectedCategory, changeSelectedCategory] = useState("1");
 
     // 모달 상태 관리
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,9 +20,6 @@ function FAQIndex() {
 
 
     // 버튼 클릭 시 카테고리 변경하기
-    const handleButtonClick = (fcategory) => {
-        changeSelectedCategory(fcategory);
-    };
 
     return (
         <BasicLayout>
@@ -45,12 +39,10 @@ function FAQIndex() {
 
             {/* 간병인 FAQ 버튼 */}
             <button
-                className={`flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple transition-colors duration-150 ${
-                    selectedCategory === "1"
+                className={`flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple transition-colors duration-150
                         ? "text-purple-100 bg-purple-600 hover:bg-purple-700"
                         : "text-black bg-white border-2 border-purple-700 hover:bg-gray-50"
                 }`}
-                onClick={() => handleButtonClick("1")}
             >
                 <div className="flex items-center">
                     <svg
@@ -68,12 +60,10 @@ function FAQIndex() {
 
             {/* 보호자/피간병인 FAQ 버튼 */}
             <button
-                className={`flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple transition-colors duration-150 ${
-                    selectedCategory === "2"
+                className={`flex items-center justify-between w-full p-4 mb-4 text-sm font-semibold rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple transition-colors duration-150
                         ? "text-purple-100 bg-purple-600 hover:bg-purple-700"
                         : "text-black bg-white border-2 border-purple-700 hover:bg-gray-50"
                 }`}
-                onClick={() => handleButtonClick("2")}
             >
                 <div className="flex items-center">
                     <svg
@@ -90,7 +80,7 @@ function FAQIndex() {
             </button>
 
 
-            <FAQListTableComponent selectedCategory={selectedCategory}/>
+            <FAQListTableComponent/>
             <FAQAddModalComponent isOpen={isModalOpen} onClose={closeModal} />
         </BasicLayout>
     );

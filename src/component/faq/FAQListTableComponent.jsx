@@ -11,7 +11,7 @@ const tableHeader = [
     "category", "title"
 ]
 
-function FAQListTableComponent({ selectedCategory }) {
+function FAQListTableComponent({  }) {
 
 
     return (
