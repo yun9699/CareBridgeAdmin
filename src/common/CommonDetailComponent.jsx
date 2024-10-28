@@ -5,8 +5,9 @@ const init = {
     list: []
 };
 
-function CommonDetailComponent({ isOpen, onClose, no, detailFn }) {
+function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight }) {
     const [data, setData] = useState(init);
+
 
     if (!isOpen) return null; // 모달이 열려 있을 때만 렌더링
 
@@ -32,7 +33,7 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn }) {
                 {/* 모달 닫기 버튼 */}
                 <button
                     className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-                    onClick={onClose}
+                    onClick={() => {onClose(); setEditRight(false)}}
                 >
                     &times;
                 </button>
@@ -49,8 +50,11 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn }) {
                                     value={value || ''} // null일 경우 빈 문자열
                                     readOnly // 필요에 따라 수정 가능
                                 />
+
                             </label>
+
                         ))}
+                        <button>수정</button>
                     </div>
                 ))}
             </div>
