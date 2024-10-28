@@ -103,7 +103,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                        no={no}
                                        detailFn={detailFn}
                                        updateFn={updateFn}
-                                       setEditRight = {setEditRight}
+                                       editRight = {editRight}
                                        isModalOpen={isModalOpen}
 
                 />}

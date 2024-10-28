@@ -33,19 +33,40 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight, up
         });
     };
 
-    const handleUpdate = () => {
+    const updateDetail = () => {
       
         const keys = Object.keys(data.list[0]);
         const firstKey = keys.length > 0 && keys[0].slice(-2) === no.toString() ? keys[0] : null;
 
         const updatedItem = { ...data.list[0] }; // 기존 객체 복사
         if(firstKey != null)    delete updatedItem[firstKey]; // 첫 번째 키-값 쌍 삭
+
+        const jsonData = JSON.stringify(updatedItem);
+        console.log(jsonData);
+        updateFn(no, jsonData).then(response => {
+            console.log("업데이트 성공:", response);
+            setModalOpen(false);
+            onClose();
+        });
     };
+
+    const handleUpdate = () => {
+
+        setModalOpen(true);
+        console.log(modalOpen);
+    }
 
 
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
+
+            {modalOpen && <CommonCheckModalComponent
+                isModalOpen={modalOpen}
+                ClickCloseModal={() => setModalOpen(false)}
+                editRight={editRight}
+                editFn={updateDetail}
+            ></CommonCheckModalComponent>}
 
             {/* 오버레이 */}
             <div className="fixed inset-0 bg-black opacity-50"></div>
@@ -87,9 +108,6 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, setEditRight, up
                     >
                         수정
                     </button>
-                    {modalOpen && <CommonCheckModalComponent
-                    />}
-
 
                     <button
                         className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-150"
