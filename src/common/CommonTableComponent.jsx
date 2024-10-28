@@ -93,7 +93,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
             setData(res);
             console.log(res);
         })
-    }, [page, searchParams,refresh]);
+    }, [page, searchParams,refresh, listFn]);
 
     return (
         <div className="overflow-x-auto p-4">
