@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import PageComponent from "@/common/pageComponent.jsx";
 import { useSearchParams } from "react-router-dom";
-import {deleteGiver} from "@/api/caregiverAPI.js";
-import {deleteQNA} from "@/api/qnaAPI.js";
-import {deleteTaker} from "@/api/caretakerAPI.js";
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
+import MatchedGiver from "@/component/caregiver/MatchedGiver.jsx";
 
 const init = {
     list: [],
@@ -30,7 +28,7 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, updateFn, actionSelect }) {
+function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, updateFn, actionSelect, matchedListFn }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -40,6 +38,8 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [deleteRight, setDeleteRight] = useState(false);
     const [editRight, setEditRight] = useState(false);
+    const [matchedList, setMatchedList] = useState(false);
+    const [matchedListNo, setMatchedListNo] = useState(0);
 
     const pageQuery = searchParams.get("page") || "";
 
@@ -95,6 +95,12 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
         })
     }
 
+    const matchedListClick = (no) => {
+
+        setMatchedList(true);
+        setMatchedListNo(no);
+    }
+
 
     useEffect(() => {
 
@@ -121,6 +127,13 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                        refresh={() => setRefresh(!refresh)}
 
                 />}
+
+            {matchedList && <MatchedGiver
+                isOpen={true}
+                no={matchedListNo}
+                matchedListFn={matchedListFn}
+                onClose={() => setMatchedList(false)}>
+            </MatchedGiver>}
 
             <table className="min-w-full leading-normal border border-gray-300 rounded-lg shadow-lg">
                 <thead className="bg-gradient-to-r from-green-400 to-green-500 text-white">
@@ -167,14 +180,16 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                         aria-label="Edit"
                                         onClick={() => {
                                             detailClick(Object.values(item)[0]);
-                                            setEditRight(true)
+                                            setEditRight(true);
                                         }}
                                     >
                                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                             <path
-                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
+                                            ></path>
                                         </svg>
                                     </button>
+
                                     <CommonCheckModalComponent
                                         isModalOpen={isModalOpen}
                                         ClickCloseModal={ClickCloseModal}
@@ -183,15 +198,15 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                         deleteRight={deleteRight}
                                         editRight={editRight}
                                     />
+
                                     <button
                                         className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
                                         aria-label="Delete"
                                         onClick={() => {
                                             ClickOpenModal(Object.values(item)[0]);
-                                            setDeleteRight(true)
+                                            setDeleteRight(true);
                                         }}
                                     >
-
                                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                             <path
                                                 fillRule="evenodd"
@@ -200,8 +215,23 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                             ></path>
                                         </svg>
                                     </button>
+
+                                    {matchedListFn && (
+
+                                        <button
+                                            className="text-green-500 hover:text-green-700 transition duration-150 ease-in-out"
+                                            aria-label="Document"
+                                            onClick={() => {matchedListClick(Object.values(item)[0])}}
+                                        >
+                                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M15 1H5a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V3a2 2 0 00-2-2zM6 4h8v2H6V4zm0 4h8v2H6V8zm0 4h8v2H6v-2zm8 6H6v-2h8v2z"/>
+                                            </svg>
+                                        </button>
+                                    )}
                                 </div>
                             </td>
+
                         )}
 
                     </tr>
