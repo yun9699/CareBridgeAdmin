@@ -3,12 +3,34 @@ import axios from 'axios';
 const host = 'http://10.10.10.105:8080/api/v1/faq';
 // const host = 'http://localhost:8080/api/v1/faq';
 
-// FAQ 목록 가져오기
+// FAQ 전체 목록 가져오기
 export const getFAQList = async (page) => {
 
-    const pageValue = (Number)(page || 1) // 없으면 1
+    const pageValue = (Number)(page || 1)
 
     const res = await axios.get(`${host}/list?page=${pageValue}`)
+    console.log(res.data)
+
+    return res.data
+}
+
+// FAQ 간병인 목록 가져오기
+export const getFAQListGiver = async (page) => {
+
+    const pageValue = (Number)(page || 1)
+
+    const res = await axios.get(`${host}/giverlist?page=${pageValue}`);
+    console.log(res.data)
+
+    return res.data
+}
+
+// FAQ 보호자 목록 가져오기
+export const getFAQListTaker = async (page) => {
+
+    const pageValue = (Number)(page || 1)
+
+    const res = await axios.get(`${host}/takerlist?page=${pageValue}`);
     console.log(res.data)
 
     return res.data
@@ -23,8 +45,9 @@ export const insertFAQ = async (faqAdd) => {
         console.error('FAQ Post Add Error', e);
         throw e;
     }
-};
+}
 
+// FAQ
 export const deleteFAQ = async (qno) => {
 
     const res = await axios.post(`${host}/delete/${qno}`)
