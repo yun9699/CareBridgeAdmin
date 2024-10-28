@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const host = 'http://10.10.10.105:8080/api/v1/faq';
+// const host = 'http://10.10.10.105:8080/api/v1/faq';
+const host = 'http://localhost:8080/api/v1/faq';
 
 // FAQ 목록 가져오기
 export const getFAQList = async (page) => {
@@ -23,3 +24,12 @@ export const insertFAQ = async (faqAdd) => {
         throw e;
     }
 };
+
+export const deleteFAQ = async (qno) => {
+
+    const res = await axios.post(`${host}/delete/${qno}`)
+
+    console.log(res.data)
+
+    return res.data
+}

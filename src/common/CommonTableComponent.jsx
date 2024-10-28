@@ -5,6 +5,7 @@ import {deleteGiver} from "@/api/caregiverAPI.js";
 import {deleteQNA} from "@/api/qnaAPI.js";
 import {deleteTaker} from "@/api/caretakerAPI.js";
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
+import CommonModalComponent from "@/common/CommonModalComponent.jsx";
 
 const init = {
     list: [],
@@ -35,6 +36,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) 
     const [refresh, setRefresh] = useState(false);
     const [detailOpen, setDetailOpen] = useState(false);
     const [no, setNo] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const pageQuery = searchParams.get("page") || "";
 
@@ -52,12 +54,29 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) 
     }
 
 
-    const ClikedeleteDate = (no) => {
 
-        delfn(no)
+
+    const ClickOpenModal = (no) => {
+        setIsModalOpen(true);
+        setNo(no);
+        console.log(no);
+
+    }
+    const ClickCloseModal = () => {
+        setIsModalOpen(false);
+        console.log("Click Close")
+    }
+
+    const ClikedeleteDate = (num) => {
+
+        delfn(num).then((res) => {
+            console.log(res)
+            setRefresh(false);
+            setIsModalOpen(false);
+        })
+
+        setRefresh(true);
     };
-
-
 
 
     useEffect(() => {
@@ -91,9 +110,10 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) 
                 {data.list.map((item) => (
                     <tr key={item[column[0]]} className="hover:bg-gray-100 border-b border-gray-200">
                         {/* 첫 번째 항목을 key로만 사용하고, 출력하지 않음 */}
-                        {column.slice(1).map((temp) => (
-                            <td key={temp} className="px-5 py-4 text-sm text-gray-600">
-                                {temp.endsWith('Date') ? formatDate(item[temp]) : item[temp]}
+                        {tmp.slice(1).map((temp) => (
+                            <td key={temp} className="px-5 py-4 text-sm text-gray-600" >
+                                {temp === 'checkAnswer' ? (item[temp] ? "답변완료" : "답변대기") :
+                                    temp.endsWith('Date') ? formatDate(item[temp]) : item[temp]}
                             </td>
                         ))}
                         <td className="px-5 py-4 text-sm">
@@ -107,10 +127,17 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) 
                                             d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                                     </svg>
                                 </button>
+                                <CommonModalComponent
+                                    isModalOpen={isModalOpen}
+                                    ClickCloseModal = {ClickCloseModal}
+                                    ClikedeleteDate = {ClikedeleteDate}
+                                    deleteNum = {no}
+                                />
                                 <button
                                     className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
                                     aria-label="Delete"
-                                    onClick={() => ClikedeleteDate(Object.values(item)[0])}>
+                                    onClick={() =>  ClickOpenModal(Object.values(item)[0])}>
+
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             fillRule="evenodd"

@@ -1,8 +1,8 @@
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
 import {deleteQNA, getQNAList, getQNAOne} from "@/api/qnaAPI.js";
 
-const column = [
-    "qno", "qtitle", "regDate", "modDate"
+const tmp = [
+    "qno", "qtitle", "checkAnswer", "regDate", "modDate", "qdelete"
 ];
 
 const tableHeader = [
