@@ -33,9 +33,12 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, updateFn }) {
 
     const handleUpdate = () => {
 
-        const firstKey = Object.keys(data.list[0])[0]; // 첫 번째 키를 가져옴
+        const keys = Object.keys(data.list[0]);
+        const firstKey = keys.length > 0 && keys[0].slice(-2) === no.toString() ? keys[0] : null;
+
         const updatedItem = { ...data.list[0] }; // 기존 객체 복사
-        delete updatedItem[firstKey]; // 첫 번째 키-값 쌍 삭제
+        if(firstKey != null)    delete updatedItem[firstKey]; // 첫 번째 키-값 쌍 삭제
+
 
         const jsonData = JSON.stringify(updatedItem);
         console.log(jsonData);
@@ -78,7 +81,7 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn, updateFn }) {
                         className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-150"
                         onClick={handleUpdate}
                     >
-                        확인
+                        수정
                     </button>
                     <button
                         className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-150"

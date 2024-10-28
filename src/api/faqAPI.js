@@ -33,3 +33,21 @@ export const deleteFAQ = async (qno) => {
 
     return res.data
 }
+
+export const updateFAQ = async (fno, faq) => {
+
+    const res = await axios.post(`${host}/update/${fno}`, faq, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    return res.data;
+}
+
+export const getFAQOne = async (fno) => {
+
+    const res = await axios.get(`${host}/read/${fno}`);
+    console.log(res.data)
+    return res.data;
+}

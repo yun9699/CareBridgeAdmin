@@ -1,5 +1,5 @@
 
-import { getFAQList } from "../../api/faqAPI";
+import {getFAQList, getFAQOne, updateFAQ} from "../../api/faqAPI";
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
 
 
@@ -20,6 +20,8 @@ function FAQListTableComponent({ selectedCategory }) {
                                 tableHeader={tableHeader}
                                 column={column}
                                 listFn={getFAQList}
+                                detailFn={getFAQOne}
+                                updateFn={updateFAQ}
             >
             </CommonTableComponent>
         </div>);

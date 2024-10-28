@@ -37,8 +37,6 @@ export const updateTaker = async (ctno, caretaker) => {
         },
     });
 
-    console.log(res.data)
-    console.log("-----------------")
     return res.data;
 }
 
