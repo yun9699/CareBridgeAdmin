@@ -3,17 +3,23 @@ import { getFAQList } from "../../api/faqAPI";
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
 
 
-const tmp = [
+const column = [
     "fno", "fcategory", "ftitle"
 ];
+
+const tableHeader = [
+    "category", "title"
+]
 
 function FAQListTableComponent({ selectedCategory }) {
 
 
     return (
         <div>
-            <CommonTableComponent tmp={tmp}
-                                  func={getFAQList}
+            <CommonTableComponent
+                                tableHeader={tableHeader}
+                                column={column}
+                                listFn={getFAQList}
             >
             </CommonTableComponent>
         </div>);

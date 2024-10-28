@@ -3,15 +3,21 @@ import {deleteGiver, getCareGiverList, getCareGiverOne} from "@/api/caregiverAPI
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 import {deleteQNA} from "@/api/qnaAPI.js";
 
-const tmp = [
-    "cgno", "cgname", "cgage", "cgphone", "cgemail", "cgpw"
+const column = [
+    "cgno", "cgname", "cgage", "cgphone", "cgemail"
 ];
+
+const tableHeader = [
+    "name", "age", "phone", "email"
+]
 
 function CareGiverComponent() {
     return (
         <div>
-            <CommonTableComponent tmp={tmp}
-                                  func={getCareGiverList}
+            <CommonTableComponent
+                                  tableHeader={tableHeader}
+                                  column={column}
+                                  listFn={getCareGiverList}
                                   detailFn={getCareGiverOne}
                                   delfn={deleteGiver}
             >
