@@ -91,13 +91,15 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
 
         actionSelect(no).then((res) => {
 
-            console.log(res);
-            setRefresh(!refresh);
+            console.log(res)
         })
     }
 
 
     useEffect(() => {
+
+        setSearchParams({ page: `${1}` });
+
         listFn(pageQuery).then((res) => {
             setData(res);
             console.log(res);
