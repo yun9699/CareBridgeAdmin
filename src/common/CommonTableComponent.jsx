@@ -71,6 +71,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
     const ClickCloseModal = () => {
         setIsModalOpen(false);
         setDeleteRight(false);
+        setEditRight(false);
         console.log("Click Close")
     }
 
@@ -103,6 +104,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                        no={no}
                                        detailFn={detailFn}
                                        updateFn={updateFn}
+                                       setEditRight = {setEditRight}
                                        editRight = {editRight}
                                        isModalOpen={isModalOpen}
                                        refresh={() => setRefresh(!refresh)}
