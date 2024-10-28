@@ -5,7 +5,7 @@ import {deleteGiver} from "@/api/caregiverAPI.js";
 import {deleteQNA} from "@/api/qnaAPI.js";
 import {deleteTaker} from "@/api/caretakerAPI.js";
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
-import CommonModalComponent from "@/common/CommonModalComponent.jsx";
+import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
 
 const init = {
     list: [],
@@ -19,6 +19,7 @@ const init = {
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
+    date.setHours(date.getHours() + 9);
     return date.toLocaleString('ko-KR', {
         year: 'numeric',
         month: '2-digit',
@@ -37,6 +38,8 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
     const [detailOpen, setDetailOpen] = useState(false);
     const [no, setNo] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [deleteRight, setDeleteRight] = useState(false);
+    const [editRight, setEditRight] = useState(false);
 
     const pageQuery = searchParams.get("page") || "";
 
@@ -59,20 +62,25 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
     const ClickOpenModal = (no) => {
         setIsModalOpen(true);
         setNo(no);
-        console.log(no);
+        deleteRight;
+        editRight;
+        console.log("-------------")
+        console.log(deleteRight);
 
     }
     const ClickCloseModal = () => {
         setIsModalOpen(false);
+        setDeleteRight(false);
         console.log("Click Close")
     }
 
-    const ClikedeleteDate = (num) => {
+    const ClikeChoice = (num) => {
 
         delfn(num).then((res) => {
             console.log(res)
             setRefresh(false);
             setIsModalOpen(false);
+            setDeleteRight(false);
         })
 
         setRefresh(true);
@@ -95,6 +103,9 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                        no={no}
                                        detailFn={detailFn}
                                        updateFn={updateFn}
+                                       setEditRight = {setEditRight}
+                                       isModalOpen={isModalOpen}
+
                 />}
 
             <table className="min-w-full leading-normal border border-gray-300 rounded-lg shadow-lg">
@@ -122,22 +133,28 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                 <button
                                     className="text-blue-500 hover:text-blue-700 transition duration-150 ease-in-out"
                                     aria-label="Edit"
-                                    onClick={() => detailClick(Object.values(item)[0])}>
+                                    onClick={() => {detailClick(Object.values(item)[0]);
+                                    setEditRight(true)}}
+                                    >
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                                     </svg>
                                 </button>
-                                <CommonModalComponent
+                                <CommonCheckModalComponent
                                     isModalOpen={isModalOpen}
                                     ClickCloseModal = {ClickCloseModal}
-                                    ClikedeleteDate = {ClikedeleteDate}
-                                    deleteNum = {no}
+                                    ClikeChoice = {ClikeChoice}
+                                    throwNum = {no}
+                                    deleteRight = {deleteRight}
+                                    editRight = {editRight}
                                 />
                                 <button
                                     className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
                                     aria-label="Delete"
-                                    onClick={() =>  ClickOpenModal(Object.values(item)[0])}>
+                                    onClick={() =>  {ClickOpenModal(Object.values(item)[0]);
+                                    setDeleteRight(true)}}
+                                >
 
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path
