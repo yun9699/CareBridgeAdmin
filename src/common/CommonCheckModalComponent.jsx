@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CommonModalComponent({ isModalOpen, ClickCloseModal, ClikedeleteDate, deleteNum }) {
+function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClikedeleteDate, deleteNum }) {
     if (!isModalOpen) {
         return null;
     }
@@ -33,4 +33,4 @@ function CommonModalComponent({ isModalOpen, ClickCloseModal, ClikedeleteDate, d
     );
 }
 
-export default CommonModalComponent;
+export default CommonCheckModalComponent;

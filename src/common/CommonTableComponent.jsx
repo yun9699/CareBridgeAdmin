@@ -5,7 +5,7 @@ import {deleteGiver} from "@/api/caregiverAPI.js";
 import {deleteQNA} from "@/api/qnaAPI.js";
 import {deleteTaker} from "@/api/caretakerAPI.js";
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
-import CommonModalComponent from "@/common/CommonModalComponent.jsx";
+import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
 
 const init = {
     list: [],
@@ -19,6 +19,7 @@ const init = {
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
+    date.setHours(date.getHours() + 9);
     return date.toLocaleString('ko-KR', {
         year: 'numeric',
         month: '2-digit',
@@ -127,7 +128,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn }) 
                                             d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                                     </svg>
                                 </button>
-                                <CommonModalComponent
+                                <CommonCheckModalComponent
                                     isModalOpen={isModalOpen}
                                     ClickCloseModal = {ClickCloseModal}
                                     ClikedeleteDate = {ClikedeleteDate}
