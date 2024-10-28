@@ -30,4 +30,13 @@ export const getQNAOne = async (qno) => {
     return res.data;
 }
 
+export const updateQNA = async (qno, qna) => {
 
+    const res = await axios.post(`${host}/update/${qno}`, qna, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    return res.data;
+}
