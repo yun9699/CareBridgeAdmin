@@ -5,7 +5,7 @@ const init = {
     list: []
 };
 
-function CommonDetailComponent({ isOpen, onClose, no, detailFn }) {
+function CommonDetailComponent({ isOpen, onClose, no, detailFn, updateFn }) {
     const [data, setData] = useState(init);
 
     if (!isOpen) return null; // 모달이 열려 있을 때만 렌더링
@@ -22,6 +22,33 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn }) {
         }
     }, [no]);
 
+    // 입력 필드 변경 핸들러
+    const handleChange = (index, key, value) => {
+        setData(prevData => {
+            const updatedList = [...prevData.list]; // 기존 리스트 복사
+            updatedList[index] = { ...updatedList[index], [key]: value }; // 수정할 필드만 업데이트
+            return { list: updatedList };
+        });
+    };
+
+    const handleUpdate = () => {
+
+        const firstKey = Object.keys(data.list[0])[0]; // 첫 번째 키를 가져옴
+        const updatedItem = { ...data.list[0] }; // 기존 객체 복사
+        delete updatedItem[firstKey]; // 첫 번째 키-값 쌍 삭제
+
+        const jsonData = JSON.stringify(updatedItem);
+        console.log(jsonData);
+
+        updateFn(no, jsonData).then(response => {
+            console.log("업데이트 성공:", response);
+        }).catch(error => {
+            console.error("업데이트 오류:", error);
+        });
+    };
+
+
+
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
             {/* 오버레이 */}
@@ -29,14 +56,6 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn }) {
 
             {/* 모달 콘텐츠 */}
             <div className="bg-white rounded-lg shadow-lg w-full max-w-md z-10 p-6 relative">
-                {/* 모달 닫기 버튼 */}
-                <button
-                    className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-                    onClick={onClose}
-                >
-                    &times;
-                </button>
-
                 {/* 모달 폼 */}
                 {data.list.map((item, index) => (
                     <div key={index}>
@@ -47,12 +66,27 @@ function CommonDetailComponent({ isOpen, onClose, no, detailFn }) {
                                     className="block w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-400 focus:border-green-400"
                                     placeholder="Input"
                                     value={value || ''} // null일 경우 빈 문자열
-                                    readOnly // 필요에 따라 수정 가능
+                                    onChange={(e) => handleChange(index, key, e.target.value)}
                                 />
                             </label>
                         ))}
                     </div>
                 ))}
+
+                <div className="flex justify-end mt-6 space-x-4">
+                    <button
+                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-150"
+                        onClick={handleUpdate}
+                    >
+                        확인
+                    </button>
+                    <button
+                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-150"
+                        onClick={onClose}
+                    >
+                        닫기
+                    </button>
+                </div>
             </div>
         </div>
     );
