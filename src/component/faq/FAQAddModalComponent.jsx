@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { insertFAQ } from "../../api/faqAPI";
+import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
 
 function FAQAddModalComponent({ isOpen, onClose }) {
     const [faqData, setFaqData] = useState({
@@ -8,7 +9,6 @@ function FAQAddModalComponent({ isOpen, onClose }) {
         fcontent: "",
     });
 
-    // 입력 필드 변경 핸들러
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFaqData((prev) => ({ ...prev, [name]: value }));
