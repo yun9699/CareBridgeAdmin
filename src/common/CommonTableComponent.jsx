@@ -77,7 +77,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
         console.log("Click Close")
     }
 
-    const ClikeChoice = (num) => {
+    const ClickChoice = (num) => {
 
         delfn(num).then((res) => {
             console.log(res)
@@ -191,7 +191,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                     <button
                                         className="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded transition duration-150 ease-in-out"
                                         aria-label="Approve"
-                                        onClick={() => ClikeChoice(item[column[0]])}
+                                        onClick={() => ClickChoice(item[column[0]])}
                                     >
                                         삭제
                                     </button>
@@ -221,7 +221,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                     <CommonCheckModalComponent
                                         isModalOpen={isModalOpen}
                                         ClickCloseModal={ClickCloseModal}
-                                        ClikeChoice={ClikeChoice}
+                                        ClickChoice={ClickChoice}
                                         throwNum={no}
                                         deleteRight={deleteRight}
                                         editRight={editRight}
