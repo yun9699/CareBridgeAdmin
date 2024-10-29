@@ -1,14 +1,11 @@
 import React from 'react';
 
-function CommonCheckModalComponent({ isOpen, no, OKButtonFn, msg, closeButtonFn }) {
+function CommonCheckModalComponent({ isOpen, OKButtonFn, msg, closeButtonFn }) {
 
     if (!isOpen) return null;
 
     const handleOK = () => {
-
-        console.log(no)
-        OKButtonFn(no).then(() => {
-
+        OKButtonFn().then(() => {
             console.log('ok');
             closeButtonFn();
         });

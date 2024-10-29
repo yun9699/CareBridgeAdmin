@@ -61,22 +61,17 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
 
 
     const approveClick = (num) => {
-        setNo(Number(num));
+
         setMsg("승인");
-        setModalFn(() => {
-            // modalFn이 실행될 때는 항상 최신 no 값을 사용하도록
-            actionSelect(Number(num)); // actionSelect를 여기서 호출
-        });
+        setModalFn(() => () => delfn(Number(num)));
         setCheckModal(true);
     };
 
 
-    const removeClick = (no) => {
+    const removeClick = (num) => {
 
-        setNo(no);
         setMsg("삭제");
-        setModalFn(delfn);
-        console.log(modalFn);
+        setModalFn(() => () => delfn(Number(num)));
         setCheckModal(true);
     }
 
@@ -109,7 +104,6 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
             {checkModal &&
                 <CommonCheckModalComponent
                     isOpen={checkModal}
-                    no={no}
                     msg={msg}
                     OKButtonFn={modalFn}
                     closeButtonFn={() => {
