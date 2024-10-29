@@ -35,7 +35,7 @@ function FAQListSelectComponent({ listOption }) {
                     ${!selected ? 'bg-green-700' : 'bg-green-500 hover:bg-green-600'}`}
                 onClick={() => handleButtonClick(false)}
             >
-                보호자/환자 FAQ
+                보호자/피간병인 FAQ
             </button>
 
             {/* 신규작성 버튼 */}
