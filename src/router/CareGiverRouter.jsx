@@ -5,7 +5,8 @@ import {Navigate} from "react-router-dom";
 const CareGiverIndex = lazy(() => import('../page/caregiver/CareGiverIndex'))
 const CareGiverList = lazy(() => import('../page/caregiver/CareGiverListPage'))
 const CareGiverNotApprovedList = lazy(() => import('../page/caregiver/CareGiverNotApprovedListPage'))
-const CareGiverComplaintList = lazy(() => import("../page/caregiver/CareGiverComplaintListPage.jsx"))
+const CareGiverComplaintList = lazy(() => import("../page/caregiver/CareGiverComplaintListPage"))
+const CareGiverRead = lazy(() => import("../page/caregiver/CareGiverReadPage"))
 
 const Loading = <LoadingPage/>
 
@@ -28,6 +29,10 @@ const CareGiverRouter = {
         {
             path: "complaint",
             element: <Suspense fallback={Loading}><CareGiverComplaintList/></Suspense>
+        },
+        {
+            path: "read/:cgno",
+            element: <Suspense fallback={Loading}><CareGiverRead/></Suspense>
         }
     ]
 }

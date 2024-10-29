@@ -1,7 +1,7 @@
 import React from 'react';
 import CareGiverNotApprovedListComponent from "@/component/caregiver/CareGiverNotApprovedListComponent.jsx";
 
-function CareGiverNotApprovedListPage(props) {
+function CareGiverNotApprovedListPage() {
     return (
         <CareGiverNotApprovedListComponent/>
     );
