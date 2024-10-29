@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
-    const [sidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
-    const [activePath, setActivePath] = useState("/");
     const location = useLocation();
+    const [activePath, setActivePath] = useState("/");
 
     const menuItems = [
         { name: "Dashboard", path: "/", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" },
@@ -16,10 +16,8 @@ function Sidebar() {
     ];
 
     const handleDropdownToggle = (menuName) => {
-        // 이미 열린 드롭다운 메뉴가 클릭되면 닫고, 다른 메뉴를 클릭하면 해당 메뉴를 열도록 설정
         setActiveDropdown(prevState => (prevState === menuName ? null : menuName));
     };
-
     useEffect(() => {
         // 현재 경로(location.pathname)가 변경될 때 activePath를 자동으로 업데이트
         setActivePath(location.pathname);
@@ -47,56 +45,79 @@ function Sidebar() {
                                     <span className="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                                 )}
                                 <div
-                                    onClick={() => {
-                                        if (item.hasDropdown) handleDropdownToggle(item.name);
-                                    }}
+                                    onClick={() => item.hasDropdown ? handleDropdownToggle(item.name) : null}
                                     className="cursor-pointer"
                                 >
-                                    <div
-                                        className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 ${
-                                            activePath === item.path ? 'text-green-600' : 'text-gray-800 hover:text-green-600'
-                                        }`}
-                                    >
-                                        <svg
-                                            className="w-5 h-5"
-                                            aria-hidden="true"
-                                            fill="none"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path d={item.icon}></path>
-                                        </svg>
-                                        <span className="ml-4">{item.name}</span>
-                                        {item.hasDropdown && (
+                                    {/* 간병인과 보호자 메뉴는 Link 대신 span으로 변경 */}
+                                    {item.name === "간병인" || item.name === "보호자" ? (
+                                        <span className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 ${location.pathname === item.path ? 'text-green-600' : 'text-gray-800 hover:text-green-600'}`}>
                                             <svg
-                                                className={`ml-auto w-4 h-4 transition-transform transform ${
-                                                    activeDropdown === item.name ? 'rotate-180' : 'rotate-0'
-                                                }`}
+                                                className="w-5 h-5"
+                                                aria-hidden="true"
                                                 fill="none"
-                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
                                                 strokeWidth="2"
                                                 viewBox="0 0 24 24"
+                                                stroke="currentColor"
                                             >
-                                                <path d="M6 9l6 6 6-6" />
+                                                <path d={item.icon}></path>
                                             </svg>
-                                        )}
-                                    </div>
+                                            <span className="ml-4">{item.name}</span>
+                                            {item.hasDropdown && (
+                                                <svg
+                                                    className={`ml-auto w-4 h-4 transition-transform transform ${activeDropdown === item.name ? 'rotate-180' : 'rotate-0'}`}
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path d="M6 9l6 6 6-6" />
+                                                </svg>
+                                            )}
+                                        </span>
+                                    ) : (
+                                        <Link
+                                            className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 ${location.pathname === item.path ? 'text-green-600' : 'text-gray-800 hover:text-green-600'}`}
+                                            to={item.path}
+                                        >
+                                            <svg
+                                                className="w-5 h-5"
+                                                aria-hidden="true"
+                                                fill="none"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path d={item.icon}></path>
+                                            </svg>
+                                            <span className="ml-4">{item.name}</span>
+                                            {item.hasDropdown && (
+                                                <svg
+                                                    className={`ml-auto w-4 h-4 transition-transform transform ${activeDropdown === item.name ? 'rotate-180' : 'rotate-0'}`}
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path d="M6 9l6 6 6-6" />
+                                                </svg>
+                                            )}
+                                        </Link>
+                                    )}
                                 </div>
                                 {item.hasDropdown && (
                                     <div
-                                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                                            activeDropdown === item.name ? 'max-h-40' : 'max-h-0'
-                                        }`}
+                                        className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === item.name ? 'max-h-40' : 'max-h-0'}`}
                                     >
                                         <ul className="pl-10 mt-2 space-y-2">
                                             <li>
                                                 <Link to={`${item.path}`} className="text-gray-700 hover:text-green-600">Subitem 1</Link>
                                             </li>
                                             <li>
-                                                <Link to={`${item.path}/subitem2`} className="text-gray-700 hover:text-green-600">Subitem 2</Link>
+                                                <Link to={`${item.path}`} className="text-gray-700 hover:text-green-600">Subitem 2</Link>
                                             </li>
                                         </ul>
                                     </div>
