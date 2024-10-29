@@ -11,6 +11,7 @@ const init = {
 }
 
 const MatchedGiver = ({ isOpen, onClose, no, matchedListFn }) => {
+
     const [data, setData] = useState(init);
 
     useEffect(() => {
@@ -22,7 +23,7 @@ const MatchedGiver = ({ isOpen, onClose, no, matchedListFn }) => {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        date.setHours(date.getHours() + 9); // 한국 시간으로 변환
+        date.setHours(date.getHours() + 9);
         return date.toLocaleString('ko-KR', {
             year: 'numeric',
             month: '2-digit',
@@ -38,7 +39,9 @@ const MatchedGiver = ({ isOpen, onClose, no, matchedListFn }) => {
             <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-lg w-full">
                     <div className="bg-gradient-to-r from-green-400 to-green-500 p-4 flex justify-between items-center">
-                        <h2 className="text-white text-lg font-semibold">리스트 상세보기</h2>
+                        <h2 className="text-white text-lg font-semibold">
+                            {data.list.length > 0 ? data.list[0].cgname : "리스트 제목"}
+                        </h2>
                         <button onClick={onClose} className="text-white hover:text-gray-200">
                             닫기
                         </button>
@@ -63,9 +66,8 @@ const MatchedGiver = ({ isOpen, onClose, no, matchedListFn }) => {
                             </tr>
                         ) : (
                             data.list.map((item) => (
-                                <tr key={item.cgname + item.ctname}
+                                <tr key={item.cmno}
                                     className="hover:bg-gray-100 border-b border-gray-200">
-                                    <td className="px-5 py-4 text-sm text-gray-600">{item.cgname}</td>
                                     <td className="px-5 py-4 text-sm text-gray-600">{item.ctname}</td>
                                     <td className="px-5 py-4 text-sm text-gray-600">{formatDate(item.start)}</td>
                                     <td className="px-5 py-4 text-sm text-gray-600">{formatDate(item.end)}</td>

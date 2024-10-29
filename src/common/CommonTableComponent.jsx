@@ -104,9 +104,8 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
 
     useEffect(() => {
 
-        setSearchParams({ page: `${1}` });
-
         listFn(pageQuery).then((res) => {
+
             setData(res);
             console.log(res);
         })

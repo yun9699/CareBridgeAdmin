@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import {useSearchParams} from "react-router-dom";
 
 function CareGiverListSelectComponent({ listOption }) {
     const [selected, setSelected] = useState(true);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const handleButtonClick = (isApproved) => {
         setSelected(isApproved);
         listOption(isApproved);
+        setSearchParams({ page: String(1) });
     };
 
     return (
