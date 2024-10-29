@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import FAQAddModalComponent from "../../component/faq/FAQAddModalComponent.jsx";
+import { useSearchParams } from 'react-router-dom';
+import FAQRegisterModalComponent from "./FAQRegisterModalComponent.jsx";
 
 function FAQListSelectComponent({ listOption }) {
     const [selected, setSelected] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     // 카테고리 변경 기능
     const handleButtonClick = (changeCategory) => {
         setSelected(changeCategory);
         listOption(changeCategory);
+        setSearchParams({ page: String(1) });
     };
 
     // 모달 열기/닫기 기능
@@ -44,7 +47,7 @@ function FAQListSelectComponent({ listOption }) {
             </button>
 
             {/* FAQ 신규작성 모달 연결 */}
-            <FAQAddModalComponent isOpen={isModalOpen} onClose={closeModal} />
+            <FAQRegisterModalComponent isOpen={isModalOpen} onClose={closeModal} />
         </div>
     );
 }
