@@ -166,6 +166,14 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                     >
                                         승인
                                     </button>
+
+                                    <button
+                                        className="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded transition duration-150 ease-in-out"
+                                        aria-label="Approve"
+                                        onClick={() => ClikeChoice(item[column[0]])}
+                                    >
+                                        삭제
+                                    </button>
                                 </div>
                             </td>
 
