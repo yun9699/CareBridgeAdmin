@@ -16,7 +16,9 @@ function Sidebar() {
             hasDropdown: true,
             subItems: [
                 { name: "리스트", path: "/caregiver" },
-                { name: "승인 대기 리스트", path: "/caregiver/notApprovedGivers" }
+                { name: "승인 대기 리스트", path: "/caregiver/notApprovedGivers" },
+                { name: "불만 접수", path: "/caregiver/complaint" }
+
             ]
         },
         {
@@ -25,8 +27,8 @@ function Sidebar() {
             icon: "M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z",
             hasDropdown: true,
             subItems: [
-                { name: "Subitem A", path: "/careTaker/list/subitemA" },
-                { name: "Subitem B", path: "/careTaker/list/subitemB" }
+                { name: "리스트", path: "/careTaker" },
+                { name: "불만 접수", path: "/caretaker/complaint" }
             ]
         },
         { name: "QNA", path: "/qna/list", icon: "M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z", hasDropdown: false },
