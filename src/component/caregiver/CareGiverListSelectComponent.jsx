@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import {useSearchParams} from "react-router-dom";
 
 function CareGiverListSelectComponent({ listOption }) {
     const [selected, setSelected] = useState(true);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const handleButtonClick = (isApproved) => {
         setSelected(isApproved);
         listOption(isApproved);
+        setSearchParams({ page: String(1) });
     };
 
     return (
@@ -22,7 +25,7 @@ function CareGiverListSelectComponent({ listOption }) {
                     ${!selected ? 'bg-green-700' : 'bg-green-500 hover:bg-green-600'}`}
                 onClick={() => handleButtonClick(false)}
             >
-                승인 되지 않은 간병인
+                승인 대기 중인 간병인
             </button>
         </div>
     );
