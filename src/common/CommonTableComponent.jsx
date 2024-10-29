@@ -37,11 +37,12 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
     const [detailOpen, setDetailOpen] = useState(false);
     const [no, setNo] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [deleteRight, setDeleteRight] = useState(false);
-    const [editRight, setEditRight] = useState(false);
     const [matchedList, setMatchedList] = useState(false);
     const [matchedListNo, setMatchedListNo] = useState(0);
     const [takerMatchedList, setTakerMatchedList] = useState(false);
+    const [checkModal, setCheckModal] = useState(false);
+    const [msg, setMsg] = useState("");
+    const [modalFn, setModalFn] = useState();
 
     const pageQuery = searchParams.get("page") || "";
 
@@ -59,42 +60,19 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
     }
 
 
+    const approveClick = (num) => {
 
-
-    const ClickOpenModal = (no) => {
-        setIsModalOpen(true);
-        setNo(no);
-        deleteRight;
-        editRight;
-        console.log("-------------")
-        console.log(deleteRight);
-
-    }
-    const ClickCloseModal = () => {
-        setIsModalOpen(false);
-        setDeleteRight(false);
-        setEditRight(false);
-        console.log("Click Close")
-    }
-
-    const ClickChoice = (num) => {
-
-        delfn(num).then((res) => {
-            console.log(res)
-            setRefresh(false);
-            setIsModalOpen(false);
-            setDeleteRight(false);
-        })
-
-        setRefresh(true);
+        setMsg("승인");
+        setModalFn(() => () => delfn(Number(num)));
+        setCheckModal(true);
     };
 
-    const approveClick = (no) => {
 
-        actionSelect(no).then((res) => {
+    const removeClick = (num) => {
 
-            console.log(res)
-        })
+        setMsg("삭제");
+        setModalFn(() => () => delfn(Number(num)));
+        setCheckModal(true);
     }
 
     const matchedListClick = (no) => {
@@ -122,6 +100,17 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
 
     return (
         <div className="overflow-x-auto p-4">
+
+            {checkModal &&
+                <CommonCheckModalComponent
+                    isOpen={checkModal}
+                    msg={msg}
+                    OKButtonFn={modalFn}
+                    closeButtonFn={() => {
+                        setCheckModal(false)
+                        setRefresh(!refresh)
+                    }} // 모달 닫기 수정
+                />}
 
             {detailOpen &&
                 <CommonDetailComponent isOpen={detailOpen}
@@ -191,7 +180,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                     <button
                                         className="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded transition duration-150 ease-in-out"
                                         aria-label="Approve"
-                                        onClick={() => ClickChoice(item[column[0]])}
+                                        onClick={() => removeClick(item[column[0]])}
                                     >
                                         삭제
                                     </button>
@@ -208,7 +197,6 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                         aria-label="Edit"
                                         onClick={() => {
                                             detailClick(Object.values(item)[0]);
-                                            setEditRight(true);
                                         }}
                                     >
                                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -218,21 +206,11 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                         </svg>
                                     </button>
 
-                                    <CommonCheckModalComponent
-                                        isModalOpen={isModalOpen}
-                                        ClickCloseModal={ClickCloseModal}
-                                        ClickChoice={ClickChoice}
-                                        throwNum={no}
-                                        deleteRight={deleteRight}
-                                        editRight={editRight}
-                                    />
-
                                     <button
                                         className="text-red-500 hover:text-red-700 transition duration-150 ease-in-out"
                                         aria-label="Delete"
                                         onClick={() => {
-                                            ClickOpenModal(Object.values(item)[0]);
-                                            setDeleteRight(true);
+                                            removeClick(Object.values(item)[0]);
                                         }}
                                     >
                                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">

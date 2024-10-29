@@ -1,46 +1,33 @@
 import React from 'react';
 
-function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClickChoice, throwNum, deleteRight, editRight, setEditRight, editFn, registerRight, setRegisterRight }) {
-    if (!isModalOpen) {
-        return null;
-    }
+function CommonCheckModalComponent({ isOpen, OKButtonFn, msg, closeButtonFn }) {
+
+    if (!isOpen) return null;
+
+    const handleOK = () => {
+        OKButtonFn().then(() => {
+            console.log('ok');
+            closeButtonFn();
+        });
+    };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-            {/* 어둡게 처리된 오버레이 추가: opacity 값을 0.5로 설정 */}
-            <div className="fixed inset-0 bg-black opacity-10"></div>
-
-            {/* 모달 콘텐츠 */}
-            <div className="bg-white rounded-lg w-full max-w-md z-10 p-6 relative">
-                {/* 모달 제목 */}
-                {editRight && <h2 className="text-lg font-semibold mb-4 text-center">정말로 수정하시겠습니까?</h2>}
-                {deleteRight && <h2 className="text-lg font-semibold mb-4 text-center">정말로 삭제하시겠습니까?</h2>}
-                {registerRight && <h2 className="text-lg font-semibold mb-4 text-center">정말로 등록하시겠습니까?</h2>}
-                <div className="flex justify-end space-x-4 mt-4">
-                    {deleteRight && <button
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                        onClick={() => ClickChoice(throwNum)}
-                    >
-                        삭제
-                    </button>}
-                    {editRight && <button
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                        onClick={() => {editFn(); setEditRight(false)}}
-                    >
-                        수정
-                    </button>}
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+            <div className="bg-white rounded-lg shadow-lg max-w-xs w-full p-6 space-y-4 text-center">
+                <h2 className="text-xl font-semibold text-gray-800">정말 {msg} 하시겠습니까?</h2>
+                <div className="flex justify-center space-x-4">
                     <button
-                        className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
-                        onClick={ClickCloseModal}
+                        className="px-4 py-2 font-semibold text-white bg-green-500 rounded hover:bg-green-600 transition duration-150 ease-in-out"
+                        onClick={handleOK}
+                    >
+                        확인
+                    </button>
+                    <button
+                        className="px-4 py-2 font-semibold text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition duration-150 ease-in-out"
+                        onClick={closeButtonFn}
                     >
                         취소
                     </button>
-                    {registerRight && <button
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                        onClick={() => {editFn(); setRegisterRight(false)}}
-                    >
-                        등록
-                    </button>}
                 </div>
             </div>
         </div>
