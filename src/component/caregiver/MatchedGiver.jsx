@@ -50,7 +50,6 @@ const MatchedGiver = ({ isOpen, onClose, no, matchedListFn }) => {
                     <table className="min-w-full leading-normal border border-gray-300 rounded-lg">
                         <thead className="bg-gray-200">
                         <tr className="text-sm font-semibold text-left uppercase tracking-wide">
-                            <th className="px-5 py-3">돌봄 제공자</th>
                             <th className="px-5 py-3">돌봄 받는 사람</th>
                             <th className="px-5 py-3">시작 날짜</th>
                             <th className="px-5 py-3">종료 날짜</th>
