@@ -2,7 +2,7 @@ import React from 'react';
 
 import {careGiverColumn, careGiverTableHeader} from "@/page/caregiver/CareGiverIndex.jsx";
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
-import {getCareGiverList, getNotApprovedGiverList, updateCareGiver} from "@/api/caregiverAPI.js";
+import {approveGiver, getNotApprovedGiverList} from "@/api/caregiverAPI.js";
 
 function CareGiverNotApprovedListComponent() {
 
@@ -14,7 +14,7 @@ function CareGiverNotApprovedListComponent() {
                 tableHeader={careGiverTableHeader}
                 column={careGiverColumn}
                 listFn={getNotApprovedGiverList}
-                updateFn={updateCareGiver}
+                actionSelect={approveGiver}
             >
             </CommonTableComponent>
         </div>
