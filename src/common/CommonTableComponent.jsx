@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import CommonDetailComponent from "@/common/CommonDetailComponent.jsx";
 import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
 import MatchedGiver from "@/component/caregiver/MatchedGiver.jsx";
+import CareTakerMatchComponent from "@/component/caretaker/CareTakerMatchComponent.jsx";
 
 const init = {
     list: [],
@@ -28,7 +29,7 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, updateFn, actionSelect, matchedListFn }) {
+function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, updateFn, actionSelect, matchedListFn, takerMatchedListFn }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -40,6 +41,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
     const [editRight, setEditRight] = useState(false);
     const [matchedList, setMatchedList] = useState(false);
     const [matchedListNo, setMatchedListNo] = useState(0);
+    const [takerMatchedList, setTakerMatchedList] = useState(false);
 
     const pageQuery = searchParams.get("page") || "";
 
@@ -101,6 +103,13 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
         setMatchedListNo(no);
     }
 
+    const takerMatchedListClick = (no) => {
+
+        setTakerMatchedList(true);
+        setMatchedListNo(no);
+
+    }
+
 
     useEffect(() => {
 
@@ -134,6 +143,15 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                 matchedListFn={matchedListFn}
                 onClose={() => setMatchedList(false)}>
             </MatchedGiver>}
+
+            {takerMatchedList && <CareTakerMatchComponent
+                isOpen={true}
+                no={matchedListNo}
+                takerMatchedListFn={takerMatchedListFn}
+                onClose={() => setTakerMatchedList(false)}>
+            </CareTakerMatchComponent>}
+
+
 
             <table className="min-w-full leading-normal border border-gray-300 rounded-lg shadow-lg">
                 <thead className="bg-gradient-to-r from-green-400 to-green-500 text-white">
@@ -222,6 +240,19 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                                             className="text-green-500 hover:text-green-700 transition duration-150 ease-in-out"
                                             aria-label="Document"
                                             onClick={() => {matchedListClick(Object.values(item)[0])}}
+                                        >
+                                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M15 1H5a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V3a2 2 0 00-2-2zM6 4h8v2H6V4zm0 4h8v2H6V8zm0 4h8v2H6v-2zm8 6H6v-2h8v2z"/>
+                                            </svg>
+                                        </button>
+                                    )}
+                                    {takerMatchedListFn && (
+
+                                        <button
+                                            className="text-green-500 hover:text-green-700 transition duration-150 ease-in-out"
+                                            aria-label="Document"
+                                            onClick={() => {takerMatchedListClick(Object.values(item)[0])}}
                                         >
                                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                                 <path

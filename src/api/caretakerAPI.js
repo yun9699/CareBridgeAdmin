@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const host = 'http://10.10.10.105:8080/api/v1/careTaker'
-// const host = 'http://localhost:8080/api/v1/careTaker'
+// const host = 'http://10.10.10.105:8080/api/v1/careTaker'
+const host = 'http://localhost:8080/api/v1/careTaker'
 
 
 export const getCareTakerList = async (page) => {
@@ -11,6 +11,15 @@ export const getCareTakerList = async (page) => {
     const res = await axios.get(`${host}/list?page=${pageValue}`);
     console.log(res.data)
     return res.data;
+}
+
+export const getCareTakerMatchList = async (ctno, page) => {
+
+    const pageValue = (Number)(page || 1)
+    const res = await axios.get(`${host}/match/${ctno}?page=${pageValue}`)
+    console.log(res.data)
+    return res.data
+
 }
 
 export const deleteTaker = async (qno) => {

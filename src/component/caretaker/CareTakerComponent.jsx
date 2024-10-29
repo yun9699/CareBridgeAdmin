@@ -1,5 +1,12 @@
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
-import {deleteTaker, getCareTakerList, getCareTakerOne, updateTaker} from "@/api/caretakerAPI.js";
+import {
+    deleteTaker,
+    getCareTakerList,
+    getCareTakerMatchList,
+    getCareTakerOne,
+    updateTaker
+} from "@/api/caretakerAPI.js";
+
 
 const column = [
     "ctno", "ctname", "ctage", "ctemail", "ctphone", "ctaddress"
@@ -12,6 +19,9 @@ const tableHeader = [
 function CareTakerComponent() {
 
 
+    const takerMatchedListFn = getCareTakerMatchList;
+
+
     return (
         <CommonTableComponent
                               tableHeader={tableHeader}
@@ -19,7 +29,9 @@ function CareTakerComponent() {
                               listFn={getCareTakerList}
                               detailFn={getCareTakerOne}
                               delfn={deleteTaker}
-                              updateFn={updateTaker}>
+                              updateFn={updateTaker}
+                              takerMatchedListFn={takerMatchedListFn}
+        >
         </CommonTableComponent>
     );
 }
