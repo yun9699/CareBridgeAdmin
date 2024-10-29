@@ -111,20 +111,15 @@ function FAQRegisterModalComponent({ isOpen, onClose, refresh }) {
                     </button>
                 </div>
 
-                <CommonCheckModalComponent
-                    isModalOpen={isRegisterModalOpen}
-                    ClickCloseModal={handleCloseRegisterModal}
-                    ClickChoice={handleRegister}
-                    throwNum={null}
-                    deleteRight={false}
-                    editRight={false}
-                    registerRight={true}
-                    setEditRight={() => {}}
-                    setRegisterRight={setIsRegisterModalOpen}
-                    editFn={handleRegister}
-                />
-
-
+                {/* CommonCheckModalComponent 연결*/}
+                {isRegisterModalOpen && (
+                    <CommonCheckModalComponent
+                        isOpen={isRegisterModalOpen}
+                        OKButtonFn={handleRegister}
+                        msg="등록"
+                        closeButtonFn={() => setIsRegisterModalOpen(false)}
+                    />
+                )}
             </div>
         )
     );
