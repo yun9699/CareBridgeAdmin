@@ -11,6 +11,7 @@ function CareGiverNotApprovedListComponent() {
         <div>
 
             <CommonTableComponent
+                name={"caregiver"}
                 tableHeader={careGiverTableHeader}
                 column={careGiverColumn}
                 listFn={getNotApprovedGiverList}

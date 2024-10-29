@@ -11,10 +11,11 @@ function CareGiverListComponent() {
         <div>
 
             <CommonTableComponent
-                                  tableHeader={careGiverTableHeader}
-                                  column={careGiverColumn}
-                                  listFn={getCareGiverList}
-                                  updateFn={updateCareGiver}
+                name={"caregiver"}
+                tableHeader={careGiverTableHeader}
+                column={careGiverColumn}
+                listFn={getCareGiverList}
+                updateFn={updateCareGiver}
             >
             </CommonTableComponent>
         </div>
