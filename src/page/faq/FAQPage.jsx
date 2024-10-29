@@ -1,8 +1,8 @@
-import FAQListTableComponent from "@/component/faq/FAQListTableComponent.jsx";
+import FAQComponent from "@/component/faq/FAQComponent.jsx";
 
 function FaqPage() {
     return (
-        <FAQListTableComponent></FAQListTableComponent>
+        <FAQComponent></FAQComponent>
     );
 }
 

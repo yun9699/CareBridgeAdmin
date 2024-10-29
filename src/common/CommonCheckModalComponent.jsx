@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClikeChoice, throwNum, deleteRight, editRight, setEditRight, editFn }) {
+function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClickChoice, throwNum, deleteRight, editRight, setEditRight, editFn, registerRight, setRegisterRight }) {
     if (!isModalOpen) {
         return null;
     }
@@ -15,10 +15,11 @@ function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClikeChoice, 
                 {/* 모달 제목 */}
                 {editRight && <h2 className="text-lg font-semibold mb-4 text-center">정말로 수정하시겠습니까?</h2>}
                 {deleteRight && <h2 className="text-lg font-semibold mb-4 text-center">정말로 삭제하시겠습니까?</h2>}
+                {registerRight && <h2 className="text-lg font-semibold mb-4 text-center">정말로 등록하시겠습니까?</h2>}
                 <div className="flex justify-end space-x-4 mt-4">
                     {deleteRight && <button
                         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                        onClick={() => ClikeChoice(throwNum)}
+                        onClick={() => ClickChoice(throwNum)}
                     >
                         삭제
                     </button>}
@@ -34,6 +35,12 @@ function CommonCheckModalComponent({ isModalOpen, ClickCloseModal, ClikeChoice, 
                     >
                         취소
                     </button>
+                    {registerRight && <button
+                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        onClick={() => {editFn(); setRegisterRight(false)}}
+                    >
+                        등록
+                    </button>}
                 </div>
             </div>
         </div>
