@@ -18,7 +18,7 @@ function Sidebar() {
             icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 0 002-2M9 5a2 2 0 012-2h2a2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01",
             hasDropdown: true,
             subItems: [
-                { name: "간병인 리스트", path: "/caregiver" },
+                { name: "간병인 리스트", path: "/caregiver/list" },
                 { name: "승인/미승인 간병인", path: "/caregiver/notapprovedgivers" },
             ]
         },
@@ -48,9 +48,7 @@ function Sidebar() {
     };
 
     useEffect(() => {
-        // 현재 경로에 따라 드롭다운 열기
         const activeItem = menuItems.find(item => {
-            // 아이템의 경로가 현재 경로로 시작하는지 확인
             if (item.hasDropdown) {
                 return location.pathname.startsWith(item.path);
             }
@@ -82,69 +80,30 @@ function Sidebar() {
                                     onClick={() => item.hasDropdown ? handleDropdownToggle(item.name) : null}
                                     className="cursor-pointer"
                                 >
-                                    {item.name === "간병인" || item.name === "보호자" ? (
+                                    {item.hasDropdown ? (
                                         <span className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 ${activeDropdown === item.name ? 'text-green-600' : 'text-gray-800 hover:text-green-600'}`}>
-                                            <svg
-                                                className="w-5 h-5"
-                                                aria-hidden="true"
-                                                fill="none"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
+                                            <svg className="w-5 h-5" aria-hidden="true" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path d={item.icon}></path>
                                             </svg>
                                             <span className="ml-4">{item.name}</span>
-                                            {item.hasDropdown && (
-                                                <svg
-                                                    className={`ml-auto w-4 h-4 transition-transform transform ${activeDropdown === item.name ? 'rotate-180' : 'rotate-0'}`}
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    strokeWidth="2"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M6 9l6 6 6-6" />
-                                                </svg>
-                                            )}
+                                            <svg className={`ml-auto w-4 h-4 transition-transform transform ${activeDropdown === item.name ? 'rotate-180' : 'rotate-0'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                <path d="M6 9l6 6 6-6" />
+                                            </svg>
                                         </span>
                                     ) : (
                                         <Link
                                             className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 ${location.pathname === item.path ? 'text-green-600' : 'text-gray-800 hover:text-green-600'}`}
                                             to={item.path}
                                         >
-                                            <svg
-                                                className="w-5 h-5"
-                                                aria-hidden="true"
-                                                fill="none"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
+                                            <svg className="w-5 h-5" aria-hidden="true" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path d={item.icon}></path>
                                             </svg>
                                             <span className="ml-4">{item.name}</span>
-                                            {item.hasDropdown && (
-                                                <svg
-                                                    className={`ml-auto w-4 h-4 transition-transform transform ${activeDropdown === item.name ? 'rotate-180' : 'rotate-0'}`}
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    strokeWidth="2"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M6 9l6 6 6-6" />
-                                                </svg>
-                                            )}
                                         </Link>
                                     )}
                                 </div>
                                 {item.hasDropdown && (
-                                    <div
-                                        className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === item.name ? 'max-h-40' : 'max-h-0'}`}
-                                    >
+                                    <div className={`overflow-hidden transition-all duration-300 ease-in-out ${activeDropdown === item.name ? 'max-h-40' : 'max-h-0'}`}>
                                         <ul className="pl-10 mt-2 space-y-2">
                                             {item.subItems.map((subItem, subIndex) => (
                                                 <li key={subIndex}>
