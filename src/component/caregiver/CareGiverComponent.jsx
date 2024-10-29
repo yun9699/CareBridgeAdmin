@@ -3,7 +3,7 @@ import {
     approveGiver,
     deleteGiver,
     getCareGiverList,
-    getCareGiverOne,
+    getCareGiverOne, getMatchedGiverList,
     getNotApprovedGiverList,
     updateCareGiver
 } from "@/api/caregiverAPI.js";
@@ -21,6 +21,8 @@ const tableHeader = [
 function CareGiverComponent() {
 
     const [list, setList] = useState(true);
+
+    const matchedListFn = getMatchedGiverList;
 
     const listFn = list ? getCareGiverList : getNotApprovedGiverList;
 
@@ -44,6 +46,7 @@ function CareGiverComponent() {
                                   delfn={deleteGiver}
                                   updateFn={updateCareGiver}
                                   actionSelect={actionSelect}
+                                  matchedListFn={matchedListFn}
             >
             </CommonTableComponent>
         </div>

@@ -20,9 +20,18 @@ function FAQAddModalComponent({ isOpen, onClose }) {
             setFaqData({ ftitle: "", fcategory: "1", fcontent: "" }); // 입력 필드 초기화
     };
 
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+
     return (
         isOpen && (
             <div className="fixed inset-0 flex items-center justify-center z-50">
+
                 {/* 모달 뒤 어두운 배경 */}
                 <div className="absolute inset-0 bg-black opacity-50"></div>
                 <div className="bg-white rounded-lg shadow-lg w-full max-w-md z-10 p-6 relative">

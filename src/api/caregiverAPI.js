@@ -47,13 +47,22 @@ export const getNotApprovedGiverList = async (page) => {
     const pageValue = (Number)(page || 1)
 
     const res = await axios.get(`${host}/notapprovedgivers?page=${pageValue}`);
-    console.log(res.data);
+
     return res.data;
 }
 
 export const approveGiver = async (cgno) => {
 
     const res = await axios.put(`${host}/approve/${cgno}`);
-    console.log(res.data)
+
+    return res.data;
+}
+
+export const getMatchedGiverList = async (cgno, page) => {
+
+    const pageValue = (Number)(page || 1)
+
+    const res = await axios.get(`${host}/matchedgiver/${cgno}?page=${pageValue}`);
+
     return res.data;
 }
