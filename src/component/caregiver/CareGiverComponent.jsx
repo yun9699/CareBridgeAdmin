@@ -9,6 +9,7 @@ import {
 } from "@/api/caregiverAPI.js";
 import {useEffect, useState} from "react";
 import CareGiverListSelectComponent from "@/component/caregiver/CareGiverListSelectComponent.jsx";
+import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
 
 const column = [
     "cgno", "cgname", "cgage", "cgphone", "cgemail"
@@ -34,6 +35,7 @@ function CareGiverComponent() {
 
     return (
         <div>
+
             <CareGiverListSelectComponent
                 listOption={handleSelectOption} // 여기에서 함수 참조를 직접 전달
             />
