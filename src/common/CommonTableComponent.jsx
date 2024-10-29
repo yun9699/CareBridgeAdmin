@@ -46,6 +46,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
 
     const pageQuery = searchParams.get("page") || "";
 
+
     const changePage = (pageNum) => {
         setPage(pageNum);
         setSearchParams({ page: pageNum });
