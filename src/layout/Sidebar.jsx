@@ -8,7 +8,7 @@ function Sidebar() {
     const location = useLocation();
 
     const menuItems = [
-        { name: "Dashboard", path: "/", icon: "...", hasDropdown: false },
+        { name: "Dashboard", path: "/", icon: "M3 12l18-9v18l-18-9z", hasDropdown: false },
         {
             name: "간병인",
             path: "/caregiver",
