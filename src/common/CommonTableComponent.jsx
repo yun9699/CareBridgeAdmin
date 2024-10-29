@@ -29,7 +29,7 @@ const formatDate = (dateString) => {
     });
 };
 
-function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, updateFn, actionSelect, matchedListFn, takerMatchedListFn }) {
+function CommonTableComponent({ tableHeader, column, listFn, detailFn, delFn, updateFn, actionSelect, matchedListFn, takerMatchedListFn }) {
     const [data, setData] = useState(init);
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
@@ -63,16 +63,18 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
 
     const approveClick = (num) => {
 
+        setNo(num);
         setMsg("승인");
-        setModalFn(() => () => delfn(Number(num)));
+        setModalFn(() => () => actionSelect(Number(num)));
         setCheckModal(true);
     };
 
 
     const removeClick = (num) => {
 
+        setNo(num);
         setMsg("삭제");
-        setModalFn(() => () => delfn(Number(num)));
+        setModalFn(() => () => delFn(Number(num)));
         setCheckModal(true);
     }
 
@@ -106,6 +108,7 @@ function CommonTableComponent({ tableHeader, column, listFn, detailFn, delfn, up
                 <CommonCheckModalComponent
                     isOpen={checkModal}
                     msg={msg}
+                    no={no}
                     OKButtonFn={modalFn}
                     closeButtonFn={() => {
                         setCheckModal(false)
