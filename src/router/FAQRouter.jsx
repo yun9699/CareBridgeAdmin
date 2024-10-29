@@ -1,21 +1,20 @@
-import {lazy, Suspense} from "react";
+import { lazy, Suspense } from "react";
 import LoadingPage from "@/page/LoadingPage.jsx";
 
-const FAQIndexBase = lazy(() => import('../page/faq/FAQIndex.jsx'))
-const FAQ = lazy(() => import('../page/faq/FAQPage.jsx'))
+// 컴포넌트의 이름을 정확히 지정하여 import
+const FAQIndexBase = lazy(() => import('../page/faq/FAQIndex.jsx'));
+const FAQPage = lazy(() => import('../page/faq/FAQPage.jsx'));
 
+const Loading = <LoadingPage />;
 
-const Loading = <LoadingPage/>
-
-const FaqRouter = {
+const FAQRouter = {
     path: "/faq",
-    element: <Suspense fallback={Loading}><FAQIndexBase/></Suspense>,
     children: [
         {
             path: "",
-            element: <Suspense fallback={Loading}><FAQ/></Suspense>
+            element: <Suspense fallback={Loading}><FAQIndexBase /></Suspense>,
         },
-    ]
-}
+    ],
+};
 
-export default FaqRouter;
+export default FAQRouter;

@@ -1,9 +1,16 @@
 
+
+import GraphComponent from "@/component/graph/GraphComponent.jsx";
+
 function MainComponent() {
+
+
+
+
     return (
-        <div>
-            MainComponent
-        </div>
+
+        <GraphComponent/>
+
     );
 }
 

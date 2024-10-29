@@ -13,6 +13,15 @@ export const getCareTakerList = async (page) => {
     return res.data;
 }
 
+export const getCareTakerMatchList = async (ctno, page) => {
+
+    const pageValue = (Number)(page || 1)
+    const res = await axios.get(`${host}/match/${ctno}?page=${pageValue}`)
+    console.log(res.data)
+    return res.data
+
+}
+
 export const deleteTaker = async (qno) => {
 
     const res = await axios.post(`${host}/delete/${qno}`)
