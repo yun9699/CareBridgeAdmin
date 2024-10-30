@@ -14,7 +14,7 @@ function FAQReadComponent() {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const data = await getFAQOne(fno); // FAQ 데이터 가져오기
+                const data = await getFAQOne(Number(fno)); // FAQ 데이터 가져오기
                 setFaqData(data);
             } catch (e) {
                 console.error("FAQ 상세조회 에러:", e);
@@ -67,6 +67,7 @@ function FAQReadComponent() {
                     삭제하기
                 </button>
             </div>
+
         </div>
     );
 }
