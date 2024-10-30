@@ -1,8 +1,13 @@
 import React from 'react';
+import {useSearchParams} from "react-router-dom";
 
-function CommonCheckModalComponent({ isOpen, no, OKButtonFn, msg, closeButtonFn }) {
+function CommonCheckModalComponent({ isOpen, no, OKButtonFn, msg, closeButtonFn, afterOKFn }) {
 
     if (!isOpen) return null;
+
+    const [searchParams] = useSearchParams();
+
+    const pageQuery = searchParams.get("page") || "";
 
     const handleOK = () => {
 
@@ -11,6 +16,7 @@ function CommonCheckModalComponent({ isOpen, no, OKButtonFn, msg, closeButtonFn 
             console.log(no)
             console.log('ok');
             closeButtonFn();
+            afterOKFn(pageQuery);
         });
     };
 

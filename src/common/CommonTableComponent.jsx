@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PageComponent from "@/common/pageComponent.jsx";
-import {useSearchParams, useNavigate} from "react-router-dom";
+import {useSearchParams, useNavigate, useLocation} from "react-router-dom";
 
 
 const init = {
@@ -32,6 +32,7 @@ function CommonTableComponent({ name, tableHeader, column, listFn, actionSelect 
     const [page, setPage] = useState(1);
     const [refresh, setRefresh] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const pageQuery = searchParams.get("page") || "";
 
@@ -44,10 +45,10 @@ function CommonTableComponent({ name, tableHeader, column, listFn, actionSelect 
     const linkClick = (num) => {
 
         navigate({
-
-            pathname: `/${name}/read/` + num
-        })
-    }
+            pathname: `/${name}/read/${num}`,
+            search: location.search, // 현재 쿼리 스트링을 그대로 유지
+        });
+    };
 
     useEffect(() => {
         listFn(pageQuery).then((res) => {
