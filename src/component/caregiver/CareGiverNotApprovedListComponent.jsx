@@ -17,6 +17,7 @@ function CareGiverNotApprovedListComponent() {
                 listFn={getNotApprovedGiverList}
                 actionSelect={approveGiver}
                 delFn={deleteGiver}
+                bridge={"notapproved"}
             >
             </CommonTableComponent>
         </div>

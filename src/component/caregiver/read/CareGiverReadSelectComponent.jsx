@@ -16,9 +16,9 @@ function CareGiverReadSelectComponent({ onSelectInfo }) {
             </button>
             <button
                 className="px-4 py-2 text-white bg-blue-500 rounded-r hover:bg-blue-600 transition duration-150"
-                onClick={() => handleButtonClick("이메일")}
+                onClick={() => handleButtonClick("matched")}
             >
-                이메일
+                매칭 기록
             </button>
             <button
                 className="px-4 py-2 text-white bg-blue-500 rounded-r hover:bg-blue-600 transition duration-150"
