@@ -16,6 +16,7 @@ function CareGiverListComponent() {
                 column={careGiverColumn}
                 listFn={getCareGiverList}
                 updateFn={updateCareGiver}
+                bridge={"approved"}
             >
             </CommonTableComponent>
         </div>

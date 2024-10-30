@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import FAQRegisterModalComponent from "./FAQRegisterModalComponent.jsx";
 
-function FAQListSelectComponent({ listOption }) {
+function FAQListSelectComponent({ listOption, refresh }) {
     const [selected, setSelected] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -47,7 +47,7 @@ function FAQListSelectComponent({ listOption }) {
             </button>
 
             {/* FAQ 신규작성 모달 연결 */}
-            <FAQRegisterModalComponent isOpen={isModalOpen} onClose={closeModal} />
+            <FAQRegisterModalComponent isOpen={isModalOpen} onClose={closeModal} refresh={refresh} />
         </div>
     );
 }
