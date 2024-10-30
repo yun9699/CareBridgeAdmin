@@ -47,7 +47,7 @@ export const insertFAQ = async (faqAdd) => {
     }
 }
 
-// FAQ
+// FAQ 삭제하기
 export const deleteFAQ = async (qno) => {
 
     const res = await axios.post(`${host}/delete/${qno}`)
@@ -57,6 +57,7 @@ export const deleteFAQ = async (qno) => {
     return res.data
 }
 
+// FAQ 수정하기
 export const updateFAQ = async (fno, faq) => {
 
     const res = await axios.post(`${host}/update/${fno}`, faq, {
@@ -68,6 +69,7 @@ export const updateFAQ = async (fno, faq) => {
     return res.data;
 }
 
+// FAQ 상세조회
 export const getFAQOne = async (fno) => {
 
     const res = await axios.get(`${host}/read/${fno}`);
