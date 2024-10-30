@@ -1,10 +1,10 @@
-import FaqReadPageComponent from "@/component/faq/FAQReadPageComponent.jsx";
+import FAQReadComponent from "@/component/faq/FAQReadComponent.jsx";
 
 function FaqReadPage() {
     return (
         <div>
         <div>FAQ READ PAGE</div>
-        <FaqReadPageComponent/>
+        <FAQReadComponent/>
         </div>
     );
 }
