@@ -25,7 +25,7 @@ function FAQReadComponent() {
     // 삭제 클릭 시 호출되는 함수
     const removeClick = () => {
         setModalOpen(true);  // 모달을 열기
-        setMsg("정말로 이 FAQ를 삭제하시겠습니까?");
+        setMsg("해당 FAQ를 삭제");
         setButtonFn(() => async () => {
             try {
                 await deleteFAQ(Number(fno));
