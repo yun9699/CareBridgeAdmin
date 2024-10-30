@@ -6,7 +6,8 @@ const CareGiverIndex = lazy(() => import('../page/caregiver/CareGiverIndex'))
 const CareGiverList = lazy(() => import('../page/caregiver/CareGiverListPage'))
 const CareGiverNotApprovedList = lazy(() => import('../page/caregiver/CareGiverNotApprovedListPage'))
 const CareGiverComplaintList = lazy(() => import("../page/caregiver/CareGiverComplaintListPage"))
-const CareGiverRead = lazy(() => import("../page/caregiver/CareGiverReadPage"))
+const CareGiverApprovedRead = lazy(() => import("../page/caregiver/CareGiverApprovedReadPage.jsx"))
+const CareGiverNotApprovedRead = lazy(() => import("../page/caregiver/CareGiverNotApprovedReadPage.jsx"))
 
 const Loading = <LoadingPage/>
 
@@ -31,8 +32,12 @@ const CareGiverRouter = {
             element: <Suspense fallback={Loading}><CareGiverComplaintList/></Suspense>
         },
         {
-            path: "read/:cgno",
-            element: <Suspense fallback={Loading}><CareGiverRead/></Suspense>
+            path: "read/approved/:cgno",
+            element: <Suspense fallback={Loading}><CareGiverApprovedRead/></Suspense>
+        },
+        {
+            path: "read/notapproved/:cgno",
+            element: <Suspense fallback={Loading}><CareGiverNotApprovedRead/></Suspense>
         }
     ]
 }
