@@ -16,9 +16,10 @@ const QnaRouter = {
             element: <Suspense fallback={Loading}><QNA/></Suspense>
         },
         {
-            path:'read',
+            path:'read/:qno',
             element: <Suspense fallback={Loading}><ReadPage/></Suspense>
-        }
+        },
+
     ]
 }
 export default QnaRouter;

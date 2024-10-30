@@ -14,6 +14,7 @@ function QNAListTableComponent() {
     return (
         <div>
             <CommonTableComponent
+                name={'qna'}
                 tableHeader={tableHeader}
                 column={column}
                 listFn={getQNAList}

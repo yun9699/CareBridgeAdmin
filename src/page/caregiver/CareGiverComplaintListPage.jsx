@@ -3,7 +3,6 @@ import CareGiverComplaintListComponent from "@/component/caregiver/CareGiverComp
 function CareGiverComplaintListPage() {
     return (
         <>
-        <div>Care Giver Complaint List Page</div>
         <CareGiverComplaintListComponent/>
         </>
     );

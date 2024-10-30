@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PageComponent from "@/common/pageComponent.jsx";
-import {useSearchParams, useNavigate} from "react-router-dom";
+import {useSearchParams, useNavigate, useLocation} from "react-router-dom";
 
 
 const init = {
@@ -33,6 +33,8 @@ function CommonTableComponent({ name, tableHeader, column, listFn, actionSelect 
     const [refresh, setRefresh] = useState(false);
     const navigate = useNavigate();
 
+    const location = useLocation();
+
     const pageQuery = searchParams.get("page") || "";
 
     const changePage = (pageNum) => {
@@ -44,8 +46,8 @@ function CommonTableComponent({ name, tableHeader, column, listFn, actionSelect 
     const linkClick = (num) => {
 
         navigate({
-
-            pathname: `/${name}/read/` + num
+            pathname: `/${name}/read/` + num,
+            search: location.search
         })
     }
 
