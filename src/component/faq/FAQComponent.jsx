@@ -1,8 +1,7 @@
-// FAQComponent.jsx
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
 import {deleteFAQ, getFAQListGiver, getFAQListTaker, getFAQOne, updateFAQ} from "@/api/faqAPI.js";
-import { useState } from "react";
-import FAQListSelectComponent from "@/component/faq/FAQlistSelectComponent.jsx";
+import { useState, useCallback } from "react";
+import FAQListSelectComponent from "@/component/faq/FAQListSelectComponent.jsx";
 
 const column = [
     "fno", "fcategory", "ftitle"
@@ -16,8 +15,10 @@ function FAQComponent() {
     const [list, setList] = useState(true);
     const [refresh, setRefresh] = useState(false);
 
+    const toggleRefresh = () => setRefresh(!refresh);
+
     // listFn을 함수로 정의하여 CommonTableComponent에 전달
-    const listFn = async (page) => {
+    const listFn = useCallback(async (page) => {
         try {
             const fn = list ? getFAQListGiver : getFAQListTaker;
             const res = await fn(page);
@@ -25,7 +26,7 @@ function FAQComponent() {
             // response.list의 fcategory 값을 변환
             if (res && res.list) {
                 res.list = res.list.map(item => {
-                    console.log("현재 fcategory 값:", item.fcategory); // 디버깅용
+                    console.log("현재 fcategory 값:", item.fcategory);
                     return {
                         ...item,
                         fcategory: item.fcategory === "1" ? "간병인" : "보호자/피간병인"
@@ -47,7 +48,7 @@ function FAQComponent() {
                 next: false
             };
         }
-    };
+    }, [list, refresh]);
 
     const handleSelectOption = (selectedList) => {
         setList(selectedList);
@@ -55,8 +56,7 @@ function FAQComponent() {
 
     const handleDelete = async (fno) => {
         await deleteFAQ(fno);
-        setRefresh(!refresh);
-
+        toggleRefresh(); // FAQ 삭제 후 목록 갱신
     };
 
 
@@ -64,6 +64,7 @@ function FAQComponent() {
         <div>
             <FAQListSelectComponent
                 listOption={handleSelectOption}
+                refresh={toggleRefresh}
             />
             <CommonTableComponent
                 name={"faq"}
@@ -73,7 +74,6 @@ function FAQComponent() {
                 detailFn={getFAQOne}
                 updateFn={updateFAQ}
                 delFn={handleDelete}
-                refresh={refresh}
             />
         </div>
     );
