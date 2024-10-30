@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PageComponent from "@/common/pageComponent.jsx";
-import {useSearchParams, useNavigate, useLocation} from "react-router-dom";
-
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 
 const init = {
     list: [],
@@ -43,7 +42,6 @@ function CommonTableComponent({ name, tableHeader, column, listFn, actionSelect 
     };
 
     const linkClick = (num) => {
-
         navigate({
             pathname: `/${name}/read/${num}`,
             search: location.search, // 현재 쿼리 스트링을 그대로 유지
@@ -59,7 +57,6 @@ function CommonTableComponent({ name, tableHeader, column, listFn, actionSelect 
 
     return (
         <div className="overflow-x-auto p-4">
-
             <table className="min-w-full leading-normal border border-gray-300 rounded-lg shadow-lg">
                 <thead className="bg-gradient-to-r from-green-400 to-green-500 text-white">
                 <tr className="text-sm font-semibold text-left uppercase tracking-wide">
@@ -70,14 +67,15 @@ function CommonTableComponent({ name, tableHeader, column, listFn, actionSelect 
                 </thead>
 
                 <tbody className="bg-white">
-
                 {data.list.map((item) => (
                     <tr key={item[column[0]]}
                         className="hover:bg-gray-100 border-b border-gray-200"
                         onClick={() => linkClick(item[column[0]])}>
                         {column.slice(1).map((temp) => (
                             <td key={temp} className="px-5 py-4 text-sm text-gray-600 text-center">
-                                {temp === 'checkAnswer' ? (
+                                {temp === 'writer' ? (
+                                    item.cgemail || item.ctemail
+                                    ): temp === 'checkAnswer' ? (
                                     <span className={item[temp] ? "text-gray-600" : "text-red-500"}>
                                             {item[temp] ? "답변완료" : "답변대기"}
                                         </span>
@@ -86,7 +84,6 @@ function CommonTableComponent({ name, tableHeader, column, listFn, actionSelect 
                         ))}
                     </tr>
                 ))}
-
                 </tbody>
 
                 <tfoot>

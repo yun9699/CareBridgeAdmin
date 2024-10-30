@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {deleteQNA, getQNAOne} from "@/api/qnaAPI.js";
+import {deleteQNA, getQNAOne, updateQNA} from "@/api/qnaAPI.js";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
 import {deleteGiver} from "@/api/caregiverAPI.js";
@@ -38,6 +38,12 @@ function QnaReadComponent() {
         setModalOpen(true)
         setMsg("삭제")
         setButtonFn(() => () => deleteQNA(qno))
+    }
+
+    const editClick = () => {
+        setModalOpen(true)
+        setMsg("수정")
+        setButtonFn(() => () => updateQNA(qno))
     }
 
     const afterOKFn = () => {
@@ -110,7 +116,7 @@ function QnaReadComponent() {
             <div className="flex justify-end space-x-4 mt-8">
                 <button
                     className="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition duration-200 ease-in-out"
-                    onClick={() => console.log("수정하기")}
+                    onClick={() => editClick()}
                 >
                     수정하기
                 </button>
