@@ -9,6 +9,10 @@ export const careGiverTableHeader = [
     "name", "age", "phone", "email"
 ]
 
+export const careGiverOneHeader = [
+    "name", "age", "phone", "email"
+]
+
 function CareGiverIndex() {
     return (
         <div>

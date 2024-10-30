@@ -1,7 +1,7 @@
 // FAQComponent.jsx
 import CommonTableComponent from "@/common/CommonTableComponent.jsx";
-import {getFAQListGiver, getFAQListTaker, getFAQOne, updateFAQ} from "@/api/faqAPI.js";
-import {useEffect, useState} from "react";
+import {deleteFAQ, getFAQListGiver, getFAQListTaker, getFAQOne, updateFAQ} from "@/api/faqAPI.js";
+import { useState } from "react";
 import FAQListSelectComponent from "@/component/faq/FAQlistSelectComponent.jsx";
 
 const column = [
@@ -14,16 +14,17 @@ const tableHeader = [
 
 function FAQComponent() {
     const [list, setList] = useState(true);
+    const [refresh, setRefresh] = useState(false);
 
     // listFn을 함수로 정의하여 CommonTableComponent에 전달
     const listFn = async (page) => {
         try {
             const fn = list ? getFAQListGiver : getFAQListTaker;
-            const response = await fn(page);
+            const res = await fn(page);
 
             // response.list의 fcategory 값을 변환
-            if (response && response.list) {
-                response.list = response.list.map(item => {
+            if (res && res.list) {
+                res.list = res.list.map(item => {
                     console.log("현재 fcategory 값:", item.fcategory); // 디버깅용
                     return {
                         ...item,
@@ -32,7 +33,7 @@ function FAQComponent() {
                 });
             }
 
-            return response;
+            return res;
 
         } catch (error) {
             console.error("FAQ 데이터 로딩 실패:", error);
@@ -52,17 +53,27 @@ function FAQComponent() {
         setList(selectedList);
     };
 
+    const handleDelete = async (fno) => {
+        await deleteFAQ(fno);
+        setRefresh(!refresh);
+
+    };
+
+
     return (
         <div>
             <FAQListSelectComponent
                 listOption={handleSelectOption}
             />
             <CommonTableComponent
+                name={"faq"}
                 tableHeader={tableHeader}
                 column={column}
                 listFn={listFn}
                 detailFn={getFAQOne}
                 updateFn={updateFAQ}
+                delFn={handleDelete}
+                refresh={refresh}
             />
         </div>
     );

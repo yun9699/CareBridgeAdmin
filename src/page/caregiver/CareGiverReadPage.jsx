@@ -1,5 +1,5 @@
 import React from 'react';
-import CareGiverReadComponent from "@/component/caregiver/CareGiverReadComponent.jsx";
+import CareGiverReadComponent from "@/component/caregiver/read/CareGiverReadComponent.jsx";
 
 function CareGiverReadPage() {
     return (
