@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {deleteQNA, getQNAOne} from "@/api/qnaAPI.js";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
+import {deleteGiver} from "@/api/caregiverAPI.js";
 
 const init = {
     qno: 0,
@@ -16,7 +18,10 @@ function QnaReadComponent() {
     const qno = Number(param.qno);
 
     const [content, setContent] = useState(init);
-    const [refresh, setRefresh] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [msg, setMsg] = useState("");
+    const [buttonFn, setButtonFn] = useState();
+
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -27,20 +32,30 @@ function QnaReadComponent() {
         getQNAOne(qno).then((res) => {
             setContent(res);
         });
-    }, [qno,refresh]);
+    }, [qno]);
 
     const deleteClick = () => {
-        console.log(page)
-        deleteQNA(qno).then((res) => {
-            setRefresh(true);
-            navigate(`/qna/list?page=${page}`)
-            console.log(res);
-        })
-        setRefresh(false);
+        setModalOpen(true)
+        setMsg("삭제")
+        setButtonFn(() => () => deleteQNA(qno))
     }
 
+    const afterOKFn = () => {
+        navigate(`/qna/list?page=${page || 1}`)
+    }
 
     return (
+        <>
+            {modalOpen && (
+                <CommonCheckModalComponent
+                    isOpen={modalOpen}
+                    no={qno}
+                    OKButtonFn={buttonFn}
+                    msg={msg}
+                    closeButtonFn={() => setModalOpen(false)}
+                    afterOKFn={(afterOKFn)}
+                />
+            )}
         <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 space-y-8 m-10">
             {/* Header */}
             <h2 className="text-3xl font-bold text-gray-800 border-b pb-5 mb-6">관리자 페이지 - QNA 상세보기</h2>
@@ -107,6 +122,7 @@ function QnaReadComponent() {
                 </button>
             </div>
         </div>
+        </>
     );
 }
 
