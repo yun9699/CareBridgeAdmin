@@ -45,7 +45,6 @@ function Sidebar() {
         }
     ];
 
-
     const handleDropdownToggle = (menuName) => {
         setActiveDropdown(prevState => (prevState === menuName ? null : menuName));
     };
@@ -67,7 +66,7 @@ function Sidebar() {
 
     return (
         <div>
-            <aside className={`z-20 ${sidebarOpen ? 'block' : 'hidden'} w-64 overflow-y-auto bg-white md:block flex-shrink-0`}>
+            <aside className={`z-20 ${sidebarOpen ? 'block' : 'hidden'} w-64 h-screen overflow-y-auto bg-white md:block flex-shrink-0`}>
                 <div className="py-4 text-gray-500">
                     <Link className="ml-6 text-lg font-bold text-gray-800 flex items-center" to="/">
                         <img src="/logo.png" alt="Logo" className="mr-2 h-8"/>
@@ -75,7 +74,7 @@ function Sidebar() {
                     </Link>
                     <ul className="mt-6">
                         {menuItems.map((item, index) => (
-                            <li key={index} className="relative px-6 py-3">
+                            <li key={index} className="relative px-6 py-4"> {/* 간격을 늘리기 위해 py-4로 변경 */}
                                 {location.pathname === item.path && (
                                     <span className="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                                 )}
