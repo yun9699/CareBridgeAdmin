@@ -5,9 +5,12 @@ function FAQIndex() {
 
     return (
         <div>
-        <BasicLayout>
-            <Outlet/>
-        </BasicLayout>
+            <BasicLayout>
+                <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+                    FAQ 관리 페이지
+                </h2>
+                <Outlet/>
+            </BasicLayout>
         </div>
     );
 }
