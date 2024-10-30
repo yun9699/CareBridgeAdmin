@@ -25,12 +25,12 @@ function Sidebar() {
         },
         {
             name: "보호자",
-            path: "/careTaker/list",
+            path: "/careTaker",
             icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10",
             hasDropdown: true,
             subItems: [
                 { name: "리스트", path: "/careTaker/list" },
-                { name: "불만 접수", path: "/caretaker/complaint" }
+                { name: "불만 접수", path: "/careTaker/complaint" }
             ]
         },
         {
