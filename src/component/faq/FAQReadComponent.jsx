@@ -13,7 +13,7 @@ function FAQReadComponent() {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [msg, setMsg] = useState("");
-    const [buttonFn, setButtonFn] = useState(() => () => {}); // 초기값 설정
+    const [buttonFn, setButtonFn] = useState(() => () => {});
     const [afterOKFn, setAfterOKFn] = useState(() => () => {});
     const navigate = useNavigate();
 
