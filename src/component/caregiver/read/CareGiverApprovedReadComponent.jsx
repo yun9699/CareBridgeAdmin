@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import CareGiverReadSelectComponent from "@/component/caregiver/read/CareGiverReadSelectComponent.jsx";
 import CareGiverReadProfileComponent from "@/component/caregiver/read/CareGiverReadProfileComponent.jsx";
-import { deleteGiver, getCareGiverOne, updateCareGiver } from "@/api/caregiverAPI.js";
+import {deleteGiver, getApprovedGiverOne, updateCareGiver} from "@/api/caregiverAPI.js";
 import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
 
-function CareGiverReadComponent() {
+function CareGiverApprovedReadComponent() {
     const param = useParams();
     const navigate = useNavigate();
 
@@ -18,6 +18,8 @@ function CareGiverReadComponent() {
     const [afterOKFn, setAfterOKFn] = useState();
 
     const no = Number(param.cgno);
+
+    console.log(location.pathname)
 
     const handleSelectInfo = (infoType) => {
         setSelectedInfo(infoType);
@@ -43,7 +45,7 @@ function CareGiverReadComponent() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getCareGiverOne(no);
+                const data = await getApprovedGiverOne(no);
                 setUserData(data);
             } catch (error) {
                 console.error("사용자 정보를 가져오는 데 오류가 발생했습니다:", error);
@@ -66,8 +68,8 @@ function CareGiverReadComponent() {
                 ) : (
                     <div>사용자 정보를 불러올 수 없습니다.</div>
                 );
-            case "이메일":
-                return <div>이메일 내용</div>;
+            case "matched":
+                return <div>matched 내용</div>;
             case "가입일":
                 return <div>가입일 내용</div>;
             case "권한":
@@ -120,4 +122,4 @@ function CareGiverReadComponent() {
     );
 }
 
-export default CareGiverReadComponent;
+export default CareGiverApprovedReadComponent;

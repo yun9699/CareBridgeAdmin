@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { getFAQOne } from '../../api/faqAPI.js';
+import { getFAQOne, updateFAQ, deleteFAQ } from '../../api/faqAPI.js';
 import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function FAQReadComponent() {
     const {fno} = useParams();
@@ -11,13 +11,29 @@ function FAQReadComponent() {
         fcontent: "",
     });
 
+    const [modalOpen, setModalOpen] = useState(false);
+    const [msg, setMsg] = useState("");
+    const [buttonFn, setButtonFn] = useState();
+    const [afterOKFn, setAfterOKFn] = useState();
+    const navigate = useNavigate();
+    const navigateList = (pageQuery) => {
+        navigate(`/faq/list?page=${pageQuery || 1}`);
+    };
+
+    const removeClick = () => {
+        setModalOpen(true);
+        setMsg("삭제");
+        setButtonFn(() => () => deleteFAQ(Number(fno)));
+        setAfterOKFn(navigateList);
+    };
+
     useEffect(() => {
         const loadData = async () => {
             try {
                 const data = await getFAQOne(Number(fno)); // FAQ 데이터 가져오기
                 setFaqData(data);
             } catch (e) {
-                console.error("FAQ 상세조회 에러:", e);
+                console.error("FAQ 상세조회를 하는데 오류가 발생했습니다:", e);
             }
         };
         loadData();
@@ -62,11 +78,23 @@ function FAQReadComponent() {
                 </button>
                 <button
                     className="px-5 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-200 ease-in-out"
-                    onClick={() => console.log("삭제하기")}
+                    onClick={removeClick}
                 >
                     삭제하기
                 </button>
             </div>
+
+            {modalOpen && (
+                <CommonCheckModalComponent
+                    isOpen={modalOpen}
+                    fno={fno}
+                    msg={msg}
+                    OKButtonFn={buttonFn}
+                    closeButtonFn={() => setModalOpen(false)}
+                    afterOKFn={afterOKFn}
+                />
+            )}
+
 
         </div>
     );

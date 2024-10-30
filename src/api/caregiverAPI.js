@@ -22,9 +22,16 @@ export const deleteGiver = async (qno) => {
 }
 
 
-export const getCareGiverOne = async (cgno) => {
+export const getApprovedGiverOne = async (cgno) => {
 
-    const res = await axios.get(`${host}/read/${cgno}`);
+    const res = await axios.get(`${host}/read/approved/${cgno}`);
+
+    return res.data;
+}
+
+export const getNotApprovedGiverOne = async (cgno) => {
+
+    const res = await axios.get(`${host}/read/notapproved/${cgno}`);
 
     return res.data;
 }
