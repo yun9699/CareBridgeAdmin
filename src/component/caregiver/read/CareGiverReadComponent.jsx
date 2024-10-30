@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import CareGiverReadSelectComponent from "@/component/caregiver/read/CareGiverReadSelectComponent.jsx";
 import CareGiverReadProfileComponent from "@/component/caregiver/read/CareGiverReadProfileComponent.jsx";
-import {deleteGiver, getCareGiverOne} from "@/api/caregiverAPI.js";
+import {deleteGiver, getCareGiverOne, updateCareGiver} from "@/api/caregiverAPI.js";
 import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
 
 function CareGiverReadComponent() {
@@ -28,6 +28,13 @@ function CareGiverReadComponent() {
         setModalOpen(true);
         setMsg("삭제");
         setButtonFn(() => () => deleteGiver(no))
+    }
+
+    const modifyClick = () => {
+
+        setModalOpen(true);
+        setMsg("수정");
+        setButtonFn(() => () => updateCareGiver(no, userData))
     }
 
     const afterOKFn = (pageQuery) => {
@@ -84,7 +91,7 @@ function CareGiverReadComponent() {
                     msg={msg}
                     OKButtonFn={buttonFn}
                     closeButtonFn={() => setModalOpen(false)}
-                    afterOKFn={afterOKFn}
+                    //afterOKFn={afterOKFn}
                 />
             )}
 
@@ -103,7 +110,7 @@ function CareGiverReadComponent() {
                 <div className="flex justify-end space-x-4 mt-8">
                     <button
                         className="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition duration-200 ease-in-out"
-                        onClick={() => console.log("수정하기")}
+                        onClick={modifyClick}
                     >
                         수정하기
                     </button>

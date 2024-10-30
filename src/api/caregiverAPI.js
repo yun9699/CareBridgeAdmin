@@ -25,7 +25,7 @@ export const deleteGiver = async (qno) => {
 export const getCareGiverOne = async (cgno) => {
 
     const res = await axios.get(`${host}/read/${cgno}`);
-    console.log(res.data)
+
     return res.data;
 }
 
@@ -37,8 +37,6 @@ export const updateCareGiver = async (cgno, caregiver) => {
         },
     });
 
-    console.log(res.data)
-    console.log("-----------------")
     return res.data;
 }
 
