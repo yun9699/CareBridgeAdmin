@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { getFAQOne, updateFAQ, deleteFAQ } from '../../api/faqAPI.js';
 import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function FAQReadComponent() {
-    const {fno} = useParams();
+    const { fno } = useParams();
     const [faqData, setFaqData] = useState({
         ftitle: "",
         fcategory: "",
@@ -13,25 +13,37 @@ function FAQReadComponent() {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [msg, setMsg] = useState("");
-    const [buttonFn, setButtonFn] = useState();
-    const [afterOKFn, setAfterOKFn] = useState();
+    const [buttonFn, setButtonFn] = useState(() => () => {}); // 초기값 설정
+    const [afterOKFn, setAfterOKFn] = useState(() => () => {});
     const navigate = useNavigate();
+
+    // 리스트 페이지로 이동하는 함수
     const navigateList = (pageQuery) => {
         navigate(`/faq/list?page=${pageQuery || 1}`);
     };
 
+    // 삭제 클릭 시 호출되는 함수
     const removeClick = () => {
-        setModalOpen(true);
-        setMsg("삭제");
-        setButtonFn(() => () => deleteFAQ(Number(fno)));
-        setAfterOKFn(navigateList);
+        setModalOpen(true);  // 모달을 열기
+        setMsg("정말로 이 FAQ를 삭제하시겠습니까?");
+        setButtonFn(() => async () => {
+            try {
+                await deleteFAQ(Number(fno));
+                setModalOpen(false);
+                navigateList();
+            } catch (error) {
+                console.error("FAQ 삭제 중 오류가 발생했습니다:", error);
+            }
+        });
+        setAfterOKFn(() => navigateList);  // 확인 후 이동할 페이지 설정
     };
 
+    // FAQ 데이터를 로드하는 useEffect
     useEffect(() => {
         const loadData = async () => {
             try {
                 const data = await getFAQOne(Number(fno)); // FAQ 데이터 가져오기
-                setFaqData(data);
+                setFaqData(data);  // 상태 업데이트
             } catch (e) {
                 console.error("FAQ 상세조회를 하는데 오류가 발생했습니다:", e);
             }
@@ -40,8 +52,8 @@ function FAQReadComponent() {
     }, [fno]);
 
     const fcategoryName = faqData.fcategory === "1"
-            ? "간병인"
-            : faqData.fcategory === "2"
+        ? "간병인"
+        : faqData.fcategory === "2"
             ? "보호자/피간병인"
             : "알 수 없음";
 
@@ -87,15 +99,13 @@ function FAQReadComponent() {
             {modalOpen && (
                 <CommonCheckModalComponent
                     isOpen={modalOpen}
-                    fno={fno}
+                    no={fno}
                     msg={msg}
                     OKButtonFn={buttonFn}
                     closeButtonFn={() => setModalOpen(false)}
                     afterOKFn={afterOKFn}
                 />
             )}
-
-
         </div>
     );
 }
