@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {deleteQNA, getQNAOne} from "@/api/qnaAPI.js";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import { deleteQNA, getQNAOne, updateQNA } from "@/api/qnaAPI.js";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CommonCheckModalComponent from "@/common/CommonCheckModalComponent.jsx";
-import {deleteGiver} from "@/api/caregiverAPI.js";
 
 const init = {
     qno: 0,
@@ -10,7 +9,11 @@ const init = {
     qcontent: null,
     checkAnswer: false,
     regDate: null,
-    modDate: null
+    modDate: null,
+    cgemail: null, // 작성자 이메일
+    cgname: null,   // 작성자 이름
+    ctemail: null,
+    ctname: null,
 };
 
 function QnaReadComponent() {
@@ -21,7 +24,6 @@ function QnaReadComponent() {
     const [modalOpen, setModalOpen] = useState(false);
     const [msg, setMsg] = useState("");
     const [buttonFn, setButtonFn] = useState();
-
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -35,14 +37,20 @@ function QnaReadComponent() {
     }, [qno]);
 
     const deleteClick = () => {
-        setModalOpen(true)
-        setMsg("삭제")
-        setButtonFn(() => () => deleteQNA(qno))
-    }
+        setModalOpen(true);
+        setMsg("삭제");
+        setButtonFn(() => () => deleteQNA(qno));
+    };
+
+    const editClick = () => {
+        setModalOpen(true);
+        setMsg("수정");
+        setButtonFn(() => () => updateQNA(qno));
+    };
 
     const afterOKFn = () => {
-        navigate(`/qna/list?page=${page || 1}`)
-    }
+        navigate(`/qna/list?page=${page || 1}`);
+    };
 
     return (
         <>
@@ -53,75 +61,81 @@ function QnaReadComponent() {
                     OKButtonFn={buttonFn}
                     msg={msg}
                     closeButtonFn={() => setModalOpen(false)}
-                    afterOKFn={(afterOKFn)}
+                    afterOKFn={afterOKFn}
                 />
             )}
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 space-y-8 m-10">
-            {/* Header */}
-            <h2 className="text-3xl font-bold text-gray-800 border-b pb-5 mb-6">관리자 페이지 - QNA 상세보기</h2>
+            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 space-y-8 m-10">
+                {/* Header */}
+                <h2 className="text-3xl font-bold text-gray-800 border-b pb-5 mb-6">
+                    관리자 페이지 - QNA 상세보기
+                </h2>
 
-            <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <div>
-                        <label className="block text-gray-500 font-medium mb-1">질문 제목</label>
-                        <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
-                            <p className="text-lg text-gray-800">{content.qtitle}</p>
+                <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label className="block text-gray-500 font-medium mb-1">질문 제목</label>
+                            <div className="flex items-center border border-gray-300 rounded-lg shadow-inner">
+                                <p className="text-lg text-gray-800 p-4 flex-grow">{content.qtitle}</p>
+                            </div>
                         </div>
                     </div>
 
-                </div>
-
-                <div>
-                    <label className="block text-gray-500 font-medium mb-1">질문 내용</label>
-                    <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
-
-                        <p className="text-lg text-gray-800">{content.qcontent}</p>
-                    </div>
-                </div>
-
-                <div>
-                <label className="block text-gray-500 font-medium mb-1">답변 내용</label>
-                <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
-
-                    <textarea
-                        className="w-full h-32 p-2 rounded-lg resize-none"
-                    ></textarea>
-                </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                    <label className="block text-gray-500 font-medium mb-1">등록일</label>
+                    <label className="text-gray-800 mb-2">작성자 정보</label>
                     <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
-                        <p className="text-lg text-gray-800">{new Date(content.regDate).toLocaleDateString()}</p>
+                        <p className="text-gray-600"><strong>이메일:</strong> {content.cgemail || content.ctemail}</p>
+                        <p className="text-gray-600"><strong>이름:</strong> {content.cgname || content.ctname}</p>
                     </div>
                     </div>
+
                     <div>
-                    <label className="block text-gray-500 font-medium mb-1">수정일</label>
-                    <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
-                        <p className="text-lg text-gray-800">{new Date(content.modDate).toLocaleDateString()}</p>
+                        <label className="block text-gray-500 font-medium mb-1">질문 내용</label>
+                        <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
+                            <p className="text-lg text-gray-800">{content.qcontent}</p>
+                        </div>
                     </div>
+
+                    <div>
+                        <label className="block text-gray-500 font-medium mb-1">답변 내용</label>
+                        <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
+                            <textarea
+                                className="w-full h-32 p-2 rounded-lg resize-none"
+                            ></textarea>
+                        </div>
                     </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label className="block text-gray-500 font-medium mb-1">등록일</label>
+                            <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
+                                <p className="text-lg text-gray-800">{new Date(content.regDate).toLocaleDateString()}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label className="block text-gray-500 font-medium mb-1">수정일</label>
+                            <div className="p-4 border border-gray-300 rounded-lg shadow-inner">
+                                <p className="text-lg text-gray-800">{new Date(content.modDate).toLocaleDateString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* 버튼 섹션 */}
+                <div className="flex justify-end space-x-4 mt-8">
+                    <button
+                        className="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition duration-200 ease-in-out"
+                        onClick={editClick}
+                    >
+                        수정하기
+                    </button>
+                    <button
+                        className="px-5 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-200 ease-in-out"
+                        onClick={deleteClick}
+                    >
+                        삭제하기
+                    </button>
                 </div>
             </div>
-
-            {/* 버튼 섹션 */}
-            <div className="flex justify-end space-x-4 mt-8">
-                <button
-                    className="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition duration-200 ease-in-out"
-                    onClick={() => console.log("수정하기")}
-                >
-                    수정하기
-                </button>
-                <button
-                    className="px-5 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-200 ease-in-out"
-                    onClick={() => deleteClick()}
-                >
-                    삭제하기
-                </button>
-            </div>
-        </div>
         </>
     );
 }
